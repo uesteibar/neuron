@@ -19,7 +19,6 @@ defmodule Neuron.Response do
     }
   end
   def handle({:ok, response}) do
-    IO.inspect response
     {
       :error,
       %Response{
