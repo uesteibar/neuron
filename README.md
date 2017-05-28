@@ -37,6 +37,10 @@ iex> Neuron.query("""
 # Response will be:
 
 {:ok, %Neuron.Response{body: %{"films" => []}}}
+
+# You can also run mutations
+
+iex> Neuron.mutation("YourMutation()")
 ```
 
 Documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
