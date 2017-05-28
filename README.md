@@ -36,7 +36,7 @@ iex> Neuron.query("""
 
 # Response will be:
 
-{:ok, %Neuron.Response{body: %{"films" => []}}}
+{:ok, %Neuron.Response{body: %{"films" => []}, status_code: 200, headers: []}}
 
 # You can also run mutations
 
