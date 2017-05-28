@@ -1,4 +1,6 @@
 defmodule Neuron do
+  alias Neuron.{Response, Connection, Config}
+
   @moduledoc """
   Allows to interact with graphql endpoints.
   """
@@ -24,11 +26,11 @@ defmodule Neuron do
   defp run(body) do
     body
     |> run_query
-    |> Neuron.Response.handle()
+    |> Response.handle()
   end
 
   defp run_query(body) do
-    Neuron.Connection.post(url(), body)
+    Connection.post(url(), body)
   end
 
   defp construct_query_string(query_string) do
@@ -39,7 +41,7 @@ defmodule Neuron do
     "mutation #{mutation_string}"
   end
 
-  defp url() do
-    Neuron.Config.get(:url)
+  defp url do
+    Config.get(:url)
   end
 end

@@ -37,7 +37,7 @@ defmodule Neuron.Config do
   defp get_config_for(:process), do: Process.get(:neuron_graphql, nil)
   defp get_config_for(:global), do: Application.get_env(:neuron, :graphql, nil)
 
-  def current_context() do
+  def current_context do
     if Process.get(:neuron_graphql, nil), do: :process, else: :global
   end
 end
