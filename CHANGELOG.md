@@ -3,4 +3,4 @@
 
 ### Features
 
-* **neuron:** interact with GraphQL endpoints ([ version](https://github.com/uesteibar/veritaserum/commit/af142ef))
+* **neuron:** interact with GraphQL endpoints ([ version](https://github.com/uesteibar/neuron/commit/af142ef))
