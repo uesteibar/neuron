@@ -1,11 +1,25 @@
 defmodule Neuron.Connection do
+  alias Neuron.Config
   @moduledoc false
 
-  def post(url, query, headers \\ []) do
+  def post(nil, _) do
+    raise ArgumentError, message: "you need to supply an url"
+  end
+
+  def post(url, query) do
     HTTPoison.post(
       url,
       query,
-      Keyword.merge(["Content-Type": "application/graphql"], headers)
+      build_headers()
     )
+  end
+
+  defp build_headers() do
+    ["Content-Type": "application/graphql"]
+      |> Keyword.merge(headers())
+  end
+
+  defp headers() do
+    Config.get(:headers) || []
   end
 end
