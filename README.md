@@ -25,6 +25,7 @@ end
 
 ```elixir
 iex> Neuron.Config.set(url: "https://example.com/graph")
+iex> Neuron.Config.set(headers: [hackney: [basic_auth: {"username", "password"}]])
 
 iex> Neuron.query("""
     {
