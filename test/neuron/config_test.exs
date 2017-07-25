@@ -14,7 +14,7 @@ defmodule Neuron.ConfigTest do
       url = "https://example.com/graph"
       Config.set(:global, url: url)
 
-      assert Config.current_context() == :global
+      assert Config.current_context(:url) == :global
       assert Config.get(:url) == url
     end
 
@@ -24,12 +24,20 @@ defmodule Neuron.ConfigTest do
       spawn(fn ->
         Config.set(:process, url: url)
 
-        assert Config.current_context() == :process
+        assert Config.current_context(:url) == :process
         assert Config.get(:url) == url
       end)
 
-      assert Config.current_context() == :global
+      assert Config.current_context(:url) == :global
       assert Config.get(:url) == nil
+    end
+
+    test "Can set multiple settings" do
+      Config.set(url: "testurl")
+      Config.set(headers: ["name": "val"])
+
+      assert Config.get(:url) == "testurl"
+      assert Config.get(:headers) == ["name": "val"]
     end
   end
 end
