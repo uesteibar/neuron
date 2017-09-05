@@ -1,3 +1,18 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/uesteibar/neuron/compare/v0.2.0...v0.3.0) (2017-09-05)
+
+
+### Features
+
+* **http:** Make it possible to add custom headers ([f54a9ff](https://github.com/uesteibar/neuron/commit/f54a9ff)),
+
+
+### Bug Fixes
+
+* **test:** Update mock/meck to fix tests on elixir 1.5 ([9768b69](https://github.com/uesteibar/neuron/commit/9768b69))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/uesteibar/neuron/compare/v0.1.1...v0.2.0) (2017-05-28)
 

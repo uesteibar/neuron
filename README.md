@@ -17,7 +17,7 @@ A GraphQL client for Elixir.
 
 ```elixir
 def deps do
-  [{:neuron, "~> 0.2.0"}]
+  [{:neuron, "~> 0.3.0"}]
 end
 ```
 
@@ -44,7 +44,7 @@ iex> Neuron.query("""
 iex> Neuron.mutation("YourMutation()")
 ```
 
-Documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
+More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
 
 ## Running locally
 
