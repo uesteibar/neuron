@@ -29,7 +29,7 @@ defmodule Neuron.Mixfile do
     [
       {:httpoison, "~> 0.11.2"},
       {:poison, "~> 3.1"},
-      {:mock, "~> 0.2.1", only: :test},
+      {:mock, "~> 0.3.1", only: :test},
       {:coverex, "~> 1.4", only: :test},
       {:credo, "~> 0.3", only: [:dev, :test]},
       {:ex_doc, "~> 0.15.1", only: :dev, runtime: false},
