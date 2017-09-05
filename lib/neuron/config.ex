@@ -55,10 +55,10 @@ defmodule Neuron.Config do
   def get(:headers), do: get(:neuron_headers)
   def get(:url), do: get(:neuron_url)
   def get(key) do
-    # current_context()
-    #   |> get_config_for()
-    #   |> Access.get(key)
-    get_config_for(current_context(key))[key]
+    key
+    |> current_context()
+    |> get_config_for()
+    |> Access.get(key)
   end
 
   defp get_config_for(:process), do: Process.get()
