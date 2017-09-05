@@ -1,3 +1,13 @@
+<a name="0.3.1"></a>
+# [0.3.1](https://github.com/uesteibar/neuron/compare/v0.3.0...v0.3.1) (2017-09-05)
+
+
+### Bug Fixes
+
+* **deps:** Relax HTTPoison dependency version ([405e748](https://github.com/uesteibar/neuron/commit/405e748))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/uesteibar/neuron/compare/v0.2.0...v0.3.0) (2017-09-05)
 
