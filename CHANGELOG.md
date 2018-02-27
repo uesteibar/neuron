@@ -1,3 +1,13 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/uesteibar/neuron/compare/v0.3.1...v) (2018-02-27)
+
+
+### Features
+
+* **deps:** Upgrade httpoison to version 1.0 ([7f65a61](https://github.com/uesteibar/neuron/commit/7f65a61))
+
+
+
 <a name="0.3.1"></a>
 # [0.3.1](https://github.com/uesteibar/neuron/compare/v0.3.0...v0.3.1) (2017-09-05)
 
