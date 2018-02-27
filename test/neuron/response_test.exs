@@ -9,11 +9,13 @@ defmodule Neuron.ResponseTest do
       headers: [
         {"X-Powered-By", "Express"},
         {"Content-Type", "application/json; charset=utf-8"},
-        {"Content-Length", "219"}, {"ETag", "W/\"db-mvJgYYgL8rU//lf7M3zjvw\""},
-        {"Date", "Sun, 28 May 2017 11:40:59 GMT"}, {"Connection", "keep-alive"}
+        {"Content-Length", "219"},
+        {"ETag", "W/\"db-mvJgYYgL8rU//lf7M3zjvw\""},
+        {"Date", "Sun, 28 May 2017 11:40:59 GMT"},
+        {"Connection", "keep-alive"}
       ],
       status_code: status_code
-   }
+    }
   end
 
   describe "when successful response" do
@@ -25,10 +27,11 @@ defmodule Neuron.ResponseTest do
 
     test "returns the parsed Response struct", %{response: response} do
       result = Response.handle({:ok, response})
+
       expected_result = %Response{
         body: %{"users" => []},
         headers: response.headers,
-        status_code: response.status_code,
+        status_code: response.status_code
       }
 
       assert result == {:ok, expected_result}
@@ -38,22 +41,28 @@ defmodule Neuron.ResponseTest do
   describe "when response with != 200 status code" do
     setup do
       %{
-        response: build_response(
-          400,
-          "{\"errors\":[{\"message\":\"Cannot query field \\\"nam\\\" on type \\\"User\\\". Did you mean \\\"name\\\"?\",\"locations\":[{\"line\":3,\"column\":11}]}]}"
+        response:
+          build_response(
+            400,
+            "{\"errors\":[{\"message\":\"Cannot query field \\\"nam\\\" on type \\\"User\\\". Did you mean \\\"name\\\"?\",\"locations\":[{\"line\":3,\"column\":11}]}]}"
           )
       }
     end
 
     test "returns the parsed Response struct with errors", %{response: response} do
       result = Response.handle({:ok, response})
+
       expected_result = %Response{
         body: %{
-          "errors" => [%{"locations" => [%{"column" => 11, "line" => 3}],
-          "message" => "Cannot query field \"nam\" on type \"User\". Did you mean \"name\"?"
-        }]},
+          "errors" => [
+            %{
+              "locations" => [%{"column" => 11, "line" => 3}],
+              "message" => "Cannot query field \"nam\" on type \"User\". Did you mean \"name\"?"
+            }
+          ]
+        },
         headers: response.headers,
-        status_code: response.status_code,
+        status_code: response.status_code
       }
 
       assert result == {:error, expected_result}

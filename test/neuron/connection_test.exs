@@ -12,49 +12,61 @@ defmodule Neuron.ConnectionTest do
     end
 
     test "sets content-type as default header", %{url: url, query: query} do
-      with_mock HTTPoison, [
-        post: fn(_url, _query, _headers) ->
+      with_mock HTTPoison,
+        post: fn _url, _query, _headers ->
           %HTTPoison.Response{}
-        end
-      ] do
+        end do
         Connection.post(url, query)
-        assert called HTTPoison.post(url, query, ["Content-Type": "application/graphql"])
+        assert called(HTTPoison.post(url, query, "Content-Type": "application/graphql"))
       end
     end
 
     test "overwrites content type if supplied", %{url: url, query: query} do
-      with_mock HTTPoison, [
-        post: fn(_url, _query, _headers) ->
+      with_mock HTTPoison,
+        post: fn _url, _query, _headers ->
           %HTTPoison.Response{}
-        end
-      ] do
-        Neuron.Config.set([headers: ["Content-Type": "application/json"]])
+        end do
+        Neuron.Config.set(headers: ["Content-Type": "application/json"])
         Connection.post(url, query)
-        assert called HTTPoison.post(url, query, ["Content-Type": "application/json"])
+        assert called(HTTPoison.post(url, query, "Content-Type": "application/json"))
       end
     end
 
     test "with basic auth", %{url: url, query: query} do
-      with_mock HTTPoison, [
-        post: fn(_url, _query, _headers) ->
+      with_mock HTTPoison,
+        post: fn _url, _query, _headers ->
           %HTTPoison.Response{}
-        end
-      ] do
-        Neuron.Config.set(headers: [hackney: [basic_auth: ["user": "password"]]])
+        end do
+        Neuron.Config.set(headers: [hackney: [basic_auth: [user: "password"]]])
         Connection.post(url, query)
-        assert called HTTPoison.post(url, query, ["Content-Type": "application/graphql", hackney: [basic_auth: ["user": "password"]]])
+
+        assert called(
+                 HTTPoison.post(
+                   url,
+                   query,
+                   "Content-Type": "application/graphql",
+                   hackney: [basic_auth: [user: "password"]]
+                 )
+               )
       end
     end
 
     test "with custom headers", %{url: url, query: query} do
-      with_mock HTTPoison, [
-        post: fn(_url, _query, _headers) ->
+      with_mock HTTPoison,
+        post: fn _url, _query, _headers ->
           %HTTPoison.Response{}
-        end
-      ] do
+        end do
         Neuron.Config.set(headers: ["X-CUSTOM": "value"])
         Connection.post(url, query)
-        assert called HTTPoison.post(url, query, ["Content-Type": "application/graphql", "X-CUSTOM": "value"])
+
+        assert called(
+                 HTTPoison.post(
+                   url,
+                   query,
+                   "Content-Type": "application/graphql",
+                   "X-CUSTOM": "value"
+                 )
+               )
       end
     end
   end

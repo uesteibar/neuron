@@ -16,7 +16,7 @@ defmodule Neuron.Connection do
 
   defp build_headers() do
     ["Content-Type": "application/graphql"]
-      |> Keyword.merge(headers())
+    |> Keyword.merge(headers())
   end
 
   defp headers() do

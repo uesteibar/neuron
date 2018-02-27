@@ -13,26 +13,24 @@ defmodule NeuronTest do
 
   describe "query/1" do
     test "calls the connection with correct url and query string", %{url: url} do
-      with_mock Connection, [
-        post: fn(_url, _body) ->
+      with_mock Connection,
+        post: fn _url, _body ->
           {:ok, %{body: ~s/{ "users": []}/, status_code: 200, headers: []}}
-        end
-      ] do
+        end do
         Neuron.query("users { name }")
-        assert called Connection.post(url, "query users { name }")
+        assert called(Connection.post(url, "query users { name }"))
       end
     end
   end
 
   describe "mutation/1" do
     test "calls the connection with correct url and query string", %{url: url} do
-      with_mock Connection, [
-        post: fn(_url, _body) ->
+      with_mock Connection,
+        post: fn _url, _body ->
           {:ok, %{body: ~s/{ "addUser": { "name": "unai" } }/, status_code: 200, headers: []}}
-        end
-      ] do
+        end do
         Neuron.mutation(~s/addUser(name: "unai")/)
-        assert called Connection.post(url, ~s/mutation addUser(name: "unai")/)
+        assert called(Connection.post(url, ~s/mutation addUser(name: "unai")/))
       end
     end
   end

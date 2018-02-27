@@ -10,14 +10,14 @@ defmodule Neuron.Mixfile do
       description: "A GraphQL client for elixir.",
       version: @version,
       elixir: "~> 1.3",
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: Coverex.Task],
       aliases: aliases(),
       package: package(),
       deps: deps(),
       docs: docs(),
-      source_url: @github,
+      source_url: @github
     ]
   end
 
@@ -32,7 +32,7 @@ defmodule Neuron.Mixfile do
       {:mock, "~> 0.3.1", only: :test},
       {:coverex, "~> 1.4", only: :test},
       {:credo, "~> 0.3", only: [:dev, :test]},
-      {:ex_doc, "~> 0.15.1", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.15.1", only: :dev, runtime: false}
     ]
   end
 
@@ -46,7 +46,7 @@ defmodule Neuron.Mixfile do
       ],
       links: %{"github" => @github},
       maintainers: ["Unai Esteibar <uesteibar@gmail.com>"],
-      licenses: ["ISC"],
+      licenses: ["ISC"]
     ]
   end
 
@@ -54,13 +54,13 @@ defmodule Neuron.Mixfile do
     [
       source_ref: "v#{@version}",
       main: "Neuron",
-      extras: ["README.md"],
+      extras: ["README.md"]
     ]
   end
 
   defp aliases do
     [
-      test: "test --cover",
+      test: "test --cover"
     ]
   end
 end

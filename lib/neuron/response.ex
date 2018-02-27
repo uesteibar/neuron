@@ -2,11 +2,9 @@ defmodule Neuron.Response do
   @moduledoc false
   alias Neuron.Response
 
-  defstruct [
-    body: %{},
-    status_code: nil,
-    headers: nil
-  ]
+  defstruct body: %{},
+            status_code: nil,
+            headers: nil
 
   def handle({:ok, %{status_code: 200} = response}) do
     {
@@ -18,6 +16,7 @@ defmodule Neuron.Response do
       }
     }
   end
+
   def handle({:ok, response}) do
     {
       :error,
@@ -28,6 +27,7 @@ defmodule Neuron.Response do
       }
     }
   end
+
   def handle({:error, response}) do
     {:error, response}
   end

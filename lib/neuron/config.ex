@@ -16,6 +16,7 @@ defmodule Neuron.Config do
       :ok
   """
   def set(value), do: set(:global, value)
+
   def set(:global, nil) do
     Application.delete_env(:neuron, :neuron_url)
     Application.delete_env(:neuron, :neuron_headers)
@@ -24,6 +25,7 @@ defmodule Neuron.Config do
   def set(:global, url: value) do
     Application.put_env(:neuron, :neuron_url, value)
   end
+
   def set(:process, url: value) do
     Process.put(:neuron_url, value)
     :ok
@@ -32,6 +34,7 @@ defmodule Neuron.Config do
   def set(:global, headers: value) do
     Application.put_env(:neuron, :neuron_headers, value)
   end
+
   def set(:process, headers: value) do
     Process.put(:neuron_headers, value)
     :ok
@@ -54,6 +57,7 @@ defmodule Neuron.Config do
   """
   def get(:headers), do: get(:neuron_headers)
   def get(:url), do: get(:neuron_url)
+
   def get(key) do
     key
     |> current_context()
