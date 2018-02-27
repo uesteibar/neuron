@@ -27,7 +27,7 @@ defmodule Neuron.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 0.11"},
+      {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"},
       {:mock, "~> 0.3.1", only: :test},
       {:coverex, "~> 1.4", only: :test},
