@@ -11,7 +11,7 @@ defmodule Neuron.Response do
       :ok,
       %Response{
         status_code: response.status_code,
-        body: parse_body(response)["data"],
+        body: parse_body(response),
         headers: response.headers
       }
     }
