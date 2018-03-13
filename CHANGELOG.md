@@ -1,3 +1,14 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/uesteibar/neuron/compare/v0.4.0...v) (2018-03-13)
+
+### BREAKING CHANGE
+
+Now the value of response.body will be %{ data: ..., errors: ... } instead of %{ ... } (only returning data).
+
+  * fix(response): return `errors` alongside `data` ([ce2534e](https://github.com/uesteibar/neuron/commit/ce2534e))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/uesteibar/neuron/compare/v0.3.1...v) (2018-02-27)
 
