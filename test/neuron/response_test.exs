@@ -29,7 +29,7 @@ defmodule Neuron.ResponseTest do
       result = Response.handle({:ok, response})
 
       expected_result = %Response{
-        body: %{"users" => []},
+        body: %{ "data" => %{"users" => []}},
         headers: response.headers,
         status_code: response.status_code
       }
