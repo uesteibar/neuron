@@ -1,5 +1,14 @@
+<a name="0.5.1"></a>
+# [0.5.1](https://github.com/uesteibar/neuron/compare/v0.5.0...v0.5.1) (2018-03-13)
+
+### Docs
+
+* docs(response): Adapt docs and tests to returning errors ([495cf61](https://github.com/uesteibar/neuron/commit/495cf61))
+
+
+
 <a name="0.5.0"></a>
-# [0.5.0](https://github.com/uesteibar/neuron/compare/v0.4.0...v) (2018-03-13)
+# [0.5.0](https://github.com/uesteibar/neuron/compare/v0.4.0...v0.5.0) (2018-03-13)
 
 ### BREAKING CHANGE
 
@@ -10,7 +19,7 @@ Now the value of response.body will be %{ data: ..., errors: ... } instead of %{
 
 
 <a name="0.4.0"></a>
-# [0.4.0](https://github.com/uesteibar/neuron/compare/v0.3.1...v) (2018-02-27)
+# [0.4.0](https://github.com/uesteibar/neuron/compare/v0.3.1...v0.4.0) (2018-02-27)
 
 
 ### Features
