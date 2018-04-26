@@ -10,7 +10,8 @@ defmodule Neuron.Connection do
     HTTPoison.post(
       url,
       query,
-      build_headers()
+      build_headers(),
+      connection_opts()
     )
   end
 
@@ -21,5 +22,9 @@ defmodule Neuron.Connection do
 
   defp headers() do
     Config.get(:headers) || []
+  end
+
+  defp connection_opts() do
+    Config.get(:connection_opts) || []
   end
 end
