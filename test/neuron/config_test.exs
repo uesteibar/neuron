@@ -35,9 +35,11 @@ defmodule Neuron.ConfigTest do
     test "Can set multiple settings" do
       Config.set(url: "testurl")
       Config.set(headers: [name: "val"])
+      Config.set(connection_opts: [foo: "bar"])
 
       assert Config.get(:url) == "testurl"
       assert Config.get(:headers) == [name: "val"]
+      assert Config.get(:connection_opts) == [foo: "bar"]
     end
   end
 end
