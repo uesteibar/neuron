@@ -1,11 +1,17 @@
 defmodule Neuron.Response do
-  @moduledoc false
   alias Neuron.Response
+
+  @moduledoc """
+  Struct representation of a query response.
+  """
+
+  @type t :: %Neuron.Response{body: Map.t(), status_code: Integer.t(), headers: keyword()}
 
   defstruct body: %{},
             status_code: nil,
             headers: nil
 
+  @doc false
   def handle({:ok, %{status_code: 200} = response}) do
     {
       :ok,
