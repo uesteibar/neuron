@@ -1,3 +1,13 @@
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/uesteibar/neuron/compare/v0.5.1...v) (2018-05-15)
+
+
+### Features
+
+* **connection:** ability to set HTTPoison connection options (#12) ([c940965](https://github.com/uesteibar/neuron/commit/c940965))
+
+
+
 <a name="0.5.1"></a>
 # [0.5.1](https://github.com/uesteibar/neuron/compare/v0.5.0...v0.5.1) (2018-03-13)
 

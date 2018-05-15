@@ -1,7 +1,7 @@
 defmodule Neuron.Mixfile do
   use Mix.Project
 
-  @version "0.5.1"
+  @version "0.6.0"
   @github "https://github.com/uesteibar/neuron"
 
   def project do
