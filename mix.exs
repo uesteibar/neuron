@@ -54,6 +54,7 @@ defmodule Neuron.Mixfile do
     [
       source_ref: "v#{@version}",
       main: "Neuron",
+logo: "neuron/logo/to/logo",
       extras: ["README.md"]
     ]
   end
