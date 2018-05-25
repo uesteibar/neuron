@@ -1,5 +1,3 @@
-<p align="center"><img src="logo/horizontal.png" alt="neuron" height="150px"></p>
-
 # Neuron
 
 [![Build Status](https://travis-ci.org/uesteibar/neuron.svg?branch=master)](https://travis-ci.org/uesteibar/neuron)
