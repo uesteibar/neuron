@@ -1,4 +1,4 @@
-# Neuron
+<p align="center"><img src="logo/horizontal.png" alt="neuron" height="150px"></p>
 
 [![Build Status](https://travis-ci.org/uesteibar/neuron.svg?branch=master)](https://travis-ci.org/uesteibar/neuron)
 [![Hex Version](https://img.shields.io/hexpm/v/neuron.svg)](https://hex.pm/packages/neuron)
