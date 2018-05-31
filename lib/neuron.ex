@@ -97,32 +97,34 @@ defmodule Neuron do
   def register_fragment(:process, query_string) do
     fragment = query_string |> process_fragment
     stored_fragments = Process.get() |> Access.get(:fragments, [])
-    Process.put(:fragments, [fragment, stored_fragments])
+    Process.put(:fragments, [fragment | stored_fragments])
   end
 
   defp process_fragment(query_string) do
-    fragment_name = Regex.run(~r/^(\w+)/, query_string, capture: :first) |> String.to_atom()
+    fragment_name =
+      Regex.run(~r/^(\w+)/, query_string, capture: :first) |> List.first() |> String.to_atom()
+
     fragment = query_string |> construct_fragment_string
 
     {fragment_name, fragment}
   end
 
   defp include_fragments(query_string) do
-    stored_fragments = [
-      Application.get_all_env(:neuron) |> Access.get(:fragments, [])
-      | Process.get() |> Access.get(:fragments, [])
-    ]
+    stored_fragments =
+      (Application.get_all_env(:neuron) |> Access.get(:fragments, [])) ++
+        (Process.get() |> Access.get(:fragments, []))
 
     fragments_to_add =
       query_string
       |> find_fragments
       |> Enum.map(&List.keyfind(stored_fragments, &1, 0, &1))
 
-    missing_fragments = fragments_to_add |> Enum.filter(&is_atom/1)
+    missing_fragments = fragments_to_add |> Enum.filter(&is_atom/1) |> Enum.map(&Atom.to_string/1)
 
     if Enum.count(missing_fragments) > 0, do: raise("Fragments #{missing_fragments} not found")
 
     fragments_to_add
+    |> Enum.map(&elem(&1, 1))
     |> Enum.reduce(query_string, &"#{&1} \n #{&2}")
   end
 
