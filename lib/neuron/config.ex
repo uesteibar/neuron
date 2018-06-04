@@ -1,4 +1,6 @@
 defmodule Neuron.Config do
+  alias Neuron.Store
+
   @moduledoc """
   This module can be used to modify your graphql client configuration
   either globaly or for the current process.
@@ -38,37 +40,13 @@ defmodule Neuron.Config do
   def set(context, value)
 
   def set(:global, nil) do
-    Application.delete_env(:neuron, :neuron_url)
-    Application.delete_env(:neuron, :neuron_headers)
-    Application.delete_env(:neuron, :neuron_connection_opts)
+    [:neuron_url, :neuron_headers, :neuron_connection_opts]
+    |> Enum.map(&Store.delete(:global, &1))
   end
 
-  def set(:global, url: value) do
-    Application.put_env(:neuron, :neuron_url, value)
-  end
-
-  def set(:process, url: value) do
-    Process.put(:neuron_url, value)
-    :ok
-  end
-
-  def set(:global, headers: value) do
-    Application.put_env(:neuron, :neuron_headers, value)
-  end
-
-  def set(:process, headers: value) do
-    Process.put(:neuron_headers, value)
-    :ok
-  end
-
-  def set(:global, connection_opts: value) do
-    Application.put_env(:neuron, :neuron_connection_opts, value)
-  end
-
-  def set(:process, connection_opts: value) do
-    Process.put(:neuron_connection_opts, value)
-    :ok
-  end
+  def set(context, url: value), do: Store.set(context, :neuron_url, value)
+  def set(context, headers: value), do: Store.set(context, :neuron_headers, value)
+  def set(context, connection_opts: value), do: Store.set(context, :neuron_connection_opts, value)
 
   @doc """
   gets configuration value for Neuron
@@ -95,20 +73,7 @@ defmodule Neuron.Config do
 
   def get(key) do
     key
-    |> current_context()
-    |> get_config_for()
-    |> Access.get(key)
-  end
-
-  defp get_config_for(:process), do: Process.get()
-  defp get_config_for(:global), do: Application.get_all_env(:neuron)
-
-  @doc false
-  def current_context(:headers), do: current_context(:neuron_headers)
-  def current_context(:url), do: current_context(:neuron_url)
-  def current_context(:connection_opts), do: current_context(:neuron_connection_opts)
-
-  def current_context(key) do
-    if Process.get(key, nil), do: :process, else: :global
+    |> Store.current_context()
+    |> Store.get(key)
   end
 end
