@@ -22,13 +22,12 @@ defmodule Neuron.Fragment do
   @spec register(context :: :global | :process, query_string :: String.t()) :: :ok
   def register(context, query_string) do
     fragment = query_string |> process_fragment_string
-    stored_fragments = Store.get(context, :fragments)
+    stored_fragments = Store.get(context, :fragments, [])
     Store.set(context, :fragments, [fragment | stored_fragments])
   end
 
   defp process_fragment_string(query_string) do
-    fragment_name =
-      Regex.run(~r/^(\w+)/, query_string, capture: :first) |> List.first() |> String.to_atom()
+    fragment_name = Regex.run(~r/^(?:\W*)(\w+)/, query_string) |> List.last() |> String.to_atom()
 
     fragment = query_string |> construct_fragment_string
 

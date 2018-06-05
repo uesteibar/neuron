@@ -14,7 +14,6 @@ defmodule Neuron.ConfigTest do
       url = "https://example.com/graph"
       Config.set(:global, url: url)
 
-      assert Config.current_context(:url) == :global
       assert Config.get(:url) == url
     end
 
@@ -24,11 +23,9 @@ defmodule Neuron.ConfigTest do
       spawn(fn ->
         Config.set(:process, url: url)
 
-        assert Config.current_context(:url) == :process
         assert Config.get(:url) == url
       end)
 
-      assert Config.current_context(:url) == :global
       assert Config.get(:url) == nil
     end
 
