@@ -28,6 +28,8 @@ defmodule Neuron.Store do
   returs neuron application/process environmental variables
 
   ## Examples
+    iex> Neuron.Store.set(:my_key, "value")
+    :ok
     iex> Neuron.Store.get(:my_key)
     "value"
   """

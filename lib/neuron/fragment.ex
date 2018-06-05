@@ -53,7 +53,7 @@ defmodule Neuron.Fragment do
 
   # TODO : Ignore '...<word>' in strings within the graphql querys
   defp find_in_query(query_string) do
-    Regex.scan(~r/(?<=\.\.\.)\w+/, query_string)
+    Regex.scan(~r/(?<=\.\.\.)\w+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/, query_string)
     |> List.flatten()
     |> Enum.map(&String.to_atom/1)
   end
