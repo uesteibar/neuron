@@ -6,14 +6,14 @@ defmodule Neuron.Fragment do
 
   ## Example
 
-  ```elixir
-  Neuron.register("\"\"
-    NameParts on Person {
-      firstName
-      lastName
-    }
-  \"\"")
-  ```
+  iex> Neuron.Fragment.register("
+  ...>  NameParts on Person {
+  ...>    firstName
+  ...>    lastName
+  ...>  }
+  ...> ")
+  :ok
+
   """
 
   @spec register(query_string :: String.t()) :: :ok
@@ -34,6 +34,7 @@ defmodule Neuron.Fragment do
     {fragment_name, fragment}
   end
 
+  @doc false
   def insert_into_query(query_string) do
     stored_fragments = Store.get(:global, :fragments, []) ++ Store.get(:process, :fragments, [])
 
@@ -44,7 +45,7 @@ defmodule Neuron.Fragment do
 
     missing_fragments = fragments_to_add |> Enum.filter(&is_atom/1) |> Enum.map(&Atom.to_string/1)
 
-    if Enum.count(missing_fragments) > 0, do: raise("Fragments #{missing_fragments} not found")
+    if Enum.any?(missing_fragments), do: raise("Fragments #{missing_fragments} not found")
 
     fragments_to_add
     |> Enum.map(&elem(&1, 1))

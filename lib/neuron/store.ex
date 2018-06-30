@@ -2,6 +2,8 @@ defmodule Neuron.Store do
   @moduledoc """
   This module provides a simple way to interface with the process and
   application environmental variables, acting as a simple KV store.
+
+  WARNING: this module is not intended to be used outside of this library.
   """
 
   @doc """
