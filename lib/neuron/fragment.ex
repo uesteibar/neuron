@@ -6,14 +6,13 @@ defmodule Neuron.Fragment do
 
   ## Example
 
-  iex> Neuron.Fragment.register("
-  ...>  NameParts on Person {
-  ...>    firstName
-  ...>    lastName
-  ...>  }
-  ...> ")
-  :ok
-
+      iex> Neuron.Fragment.register("
+      ...>  NameParts on Person {
+      ...>    firstName
+      ...>    lastName
+      ...>  }
+      ...> ")
+      :ok
   """
 
   @spec register(query_string :: String.t()) :: :ok

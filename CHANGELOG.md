@@ -1,3 +1,13 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/uesteibar/neuron/compare/v0.6.0...v) (2018-07-01)
+
+
+### Features
+
+* **fragments:** Allow to register fragments to fill queries automatically ([5593fc6](https://github.com/uesteibar/neuron/commit/5593fc6)), closes [#1](https://github.com/uesteibar/neuron/issues/1)
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/uesteibar/neuron/compare/v0.5.1...v) (2018-05-15)
 
