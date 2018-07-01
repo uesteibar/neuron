@@ -1,5 +1,5 @@
 defmodule Neuron do
-  alias Neuron.{Response, Connection, Config}
+  alias Neuron.{Response, Connection, Config, Fragment}
 
   @moduledoc """
   Neuron is a GraphQL client for elixir.
@@ -46,6 +46,7 @@ defmodule Neuron do
   def query(query_string) do
     query_string
     |> construct_query_string()
+    |> Fragment.insert_into_query()
     |> run()
   end
 
@@ -63,6 +64,7 @@ defmodule Neuron do
   def mutation(mutation_string) do
     mutation_string
     |> construct_mutation_string()
+    |> Fragment.insert_into_query()
     |> run()
   end
 
