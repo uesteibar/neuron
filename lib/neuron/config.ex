@@ -26,6 +26,7 @@ defmodule Neuron.Config do
   - url: graphql endpoint url
   - headers: headers to be sent in the request
   - connection_opts: additional options to be passed to HTTPoison
+  - as_json: sends requests as json instead of graphql format (e.g Github API v4 only accepts json)
 
   ## Examples
 
@@ -47,6 +48,7 @@ defmodule Neuron.Config do
   def set(context, url: value), do: Store.set(context, :neuron_url, value)
   def set(context, headers: value), do: Store.set(context, :neuron_headers, value)
   def set(context, connection_opts: value), do: Store.set(context, :neuron_connection_opts, value)
+  def set(context, as_json: value), do: Store.set(context, :neuron_as_json, value)
 
   @doc """
   gets configuration value for Neuron
@@ -70,6 +72,7 @@ defmodule Neuron.Config do
   def get(:headers), do: get(:neuron_headers)
   def get(:url), do: get(:neuron_url)
   def get(:connection_opts), do: get(:neuron_connection_opts)
+  def get(:as_json), do: get(:neuron_as_json)
 
   def get(key) do
     key

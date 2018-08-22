@@ -79,14 +79,26 @@ defmodule Neuron do
   end
 
   defp construct_query_string(query_string) do
-    "query #{query_string}"
+    if as_json() do
+      Poison.encode!(%{query: query_string})
+    else
+      "query #{query_string}"
+    end
   end
 
   defp construct_mutation_string(mutation_string) do
-    "mutation #{mutation_string}"
+    if as_json() do
+      Poison.encode!(%{mutation: mutation_string})
+    else
+      "mutation #{mutation_string}"
+    end
   end
 
   defp url do
     Config.get(:url)
+  end
+
+  defp as_json do
+    Config.get(:as_json)
   end
 end

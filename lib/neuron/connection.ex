@@ -16,7 +16,8 @@ defmodule Neuron.Connection do
   end
 
   defp build_headers() do
-    ["Content-Type": "application/graphql"]
+    Config.get(:as_json)
+    |> base_headers()
     |> Keyword.merge(headers())
   end
 
@@ -27,4 +28,7 @@ defmodule Neuron.Connection do
   defp connection_opts() do
     Config.get(:connection_opts) || []
   end
+
+  defp base_headers(true), do: []
+  defp base_headers(_), do: ["Content-Type": "application/graphql"]
 end
