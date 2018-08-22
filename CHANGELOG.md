@@ -1,3 +1,13 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/uesteibar/neuron/compare/v0.7.0...v) (2018-08-22)
+
+
+### Features
+
+* **query:** Allow to send queries as json ([#20](https://github.com/uesteibar/neuron/issues/20)) ([c9689a8](https://github.com/uesteibar/neuron/commit/c9689a8)), closes [#19](https://github.com/uesteibar/neuron/issues/19)
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/uesteibar/neuron/compare/v0.6.0...v) (2018-07-01)
 

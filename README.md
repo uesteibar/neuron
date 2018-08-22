@@ -17,7 +17,7 @@ A GraphQL client for Elixir.
 
 ```elixir
 def deps do
-  [{:neuron, "~> 0.7.0"}]
+  [{:neuron, "~> 0.8.0"}]
 end
 ```
 
