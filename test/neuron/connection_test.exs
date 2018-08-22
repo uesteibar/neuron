@@ -91,5 +91,18 @@ defmodule Neuron.ConnectionTest do
                )
       end
     end
+
+    test "with as_json: true", %{url: url, query: query} do
+      with_mock HTTPoison,
+        post: fn _url, _query, _headers, _opts ->
+          %HTTPoison.Response{}
+        end do
+        Neuron.Config.set(as_json: true)
+        Connection.post(url, query)
+        Neuron.Config.set(as_json: false)
+
+        assert called(HTTPoison.post(url, query, [], []))
+      end
+    end
   end
 end
