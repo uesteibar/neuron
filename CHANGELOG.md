@@ -1,5 +1,15 @@
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/uesteibar/neuron/compare/v0.8.0...v) (2018-09-08)
+
+
+### Features
+
+* **options:** Allow to override options per request ([6ba4b39](https://github.com/uesteibar/neuron/commit/6ba4b39)), closes [#18](https://github.com/uesteibar/neuron/issues/18)
+
+
+
 <a name="0.8.0"></a>
-# [0.8.0](https://github.com/uesteibar/neuron/compare/v0.7.0...v) (2018-08-22)
+# [0.8.0](https://github.com/uesteibar/neuron/compare/v0.7.0...v0.8.0) (2018-08-22)
 
 
 ### Features
@@ -9,7 +19,7 @@
 
 
 <a name="0.7.0"></a>
-# [0.7.0](https://github.com/uesteibar/neuron/compare/v0.6.0...v) (2018-07-01)
+# [0.7.0](https://github.com/uesteibar/neuron/compare/v0.6.0...v0.7.0) (2018-07-01)
 
 
 ### Features
@@ -19,7 +29,7 @@
 
 
 <a name="0.6.0"></a>
-# [0.6.0](https://github.com/uesteibar/neuron/compare/v0.5.1...v) (2018-05-15)
+# [0.6.0](https://github.com/uesteibar/neuron/compare/v0.5.1...v0.6.0) (2018-05-15)
 
 
 ### Features

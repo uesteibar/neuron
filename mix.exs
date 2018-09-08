@@ -1,7 +1,7 @@
 defmodule Neuron.Mixfile do
   use Mix.Project
 
-  @version "0.8.0"
+  @version "0.9.0"
   @github "https://github.com/uesteibar/neuron"
 
   def project do
@@ -32,7 +32,7 @@ defmodule Neuron.Mixfile do
       {:mock, "~> 0.3.1", only: :test},
       {:coverex, "~> 1.4", only: :test},
       {:credo, "~> 0.3", only: [:dev, :test]},
-      {:ex_doc, "~> 0.15.1", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 
