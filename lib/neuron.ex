@@ -139,6 +139,6 @@ defmodule Neuron do
     Keyword.get(options, :headers, Config.get(:headers) || [])
   end
 
-  defp base_headers(true), do: []
+  defp base_headers(true), do: ["Content-Type": "application/json"]
   defp base_headers(_), do: ["Content-Type": "application/graphql"]
 end
