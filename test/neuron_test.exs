@@ -8,9 +8,10 @@ defmodule NeuronTest do
   setup do
     url = "www.example.com/graph"
     base_headers = ["Content-Type": "application/graphql"]
+    json_headers = ["Content-Type": "application/json"]
     Neuron.Config.set(nil)
     Neuron.Config.set(url: url)
-    %{url: url, base_headers: base_headers}
+    %{url: url, base_headers: base_headers, json_headers: json_headers}
   end
 
   describe "query/1" do
@@ -27,15 +28,16 @@ defmodule NeuronTest do
       end
     end
 
-    test "calls as json if as_json: true", %{url: url} do
+    test "calls as json if as_json: true", %{url: url, json_headers: json_headers} do
       with_mock Connection,
-        post: fn _url, _body, _headers ->
+        post: fn _url, _body, headers ->
+          IO.inspect(headers)
           {:ok, %{body: ~s/{"data": {"users": []}}/, status_code: 200, headers: []}}
         end do
         Neuron.Config.set(as_json: true)
         Neuron.query("users { name }")
         Neuron.Config.set(as_json: false)
-        assert called(Connection.post(url, "{\"query\":\"users { name }\"}", []))
+        assert called(Connection.post(url, "{\"query\":\"users { name }\"}", json_headers))
       end
     end
   end
@@ -77,17 +79,27 @@ defmodule NeuronTest do
       end
     end
 
-    test "calls as json if as_json: true", %{url: url} do
+    test "calls as json if as_json: true", %{url: url, json_headers: json_headers} do
       with_mock Connection,
         post: fn _url, _body, _headers ->
           {:ok,
-           %{body: ~s/{"data": {"addUser": {"name": "unai"}}}/, status_code: 200, headers: []}}
+           %{
+             body: ~s/{"data": {"addUser": {"name": "unai"}}}/,
+             status_code: 200,
+             headers: []
+           }}
         end do
         Neuron.Config.set(as_json: true)
         Neuron.mutation(~s/addUser(name: "unai")/)
         Neuron.Config.set(as_json: false)
 
-        assert called(Connection.post(url, "{\"mutation\":\"addUser(name: \\\"unai\\\")\"}", []))
+        assert called(
+                 Connection.post(
+                   url,
+                   "{\"mutation\":\"addUser(name: \\\"unai\\\")\"}",
+                   json_headers
+                 )
+               )
       end
     end
   end
