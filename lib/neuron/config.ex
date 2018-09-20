@@ -30,7 +30,7 @@ defmodule Neuron.Config do
 
   ## Examples
 
-      iex> Neuron.Config.set(headers: ["name": "val"])
+      iex> Neuron.Config.set(headers: [name: "val"])
       :ok
 
       iex> Neuron.Config.set(:process, url: "http://example.com/graph")
