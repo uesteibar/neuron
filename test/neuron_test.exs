@@ -30,8 +30,7 @@ defmodule NeuronTest do
 
     test "calls as json if as_json: true", %{url: url, json_headers: json_headers} do
       with_mock Connection,
-        post: fn _url, _body, headers ->
-          IO.inspect(headers)
+        post: fn _url, _body, _headers ->
           {:ok, %{body: ~s/{"data": {"users": []}}/, status_code: 200, headers: []}}
         end do
         Neuron.Config.set(as_json: true)
