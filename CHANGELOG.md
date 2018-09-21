@@ -1,5 +1,15 @@
+<a name="0.9.1"></a>
+# [0.9.1](https://github.com/uesteibar/neuron/compare/v0.9.0...v0.9.1) (2018-09-21)
+
+
+### Bug Fixes
+
+* **headers:** Use `application/json` content type with :as_json ([f369555](https://github.com/uesteibar/neuron/commit/f369555))
+
+
+
 <a name="0.9.0"></a>
-# [0.9.0](https://github.com/uesteibar/neuron/compare/v0.8.0...v) (2018-09-08)
+# [0.9.0](https://github.com/uesteibar/neuron/compare/v0.8.0...v0.9.0) (2018-09-08)
 
 
 ### Features
