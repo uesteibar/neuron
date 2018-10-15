@@ -1,3 +1,19 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/uesteibar/neuron/compare/v0.9.1...v1.0.0) (2018-10-15)
+
+
+### Features
+
+* **query:** Allow passing variables ([ff82f0a](https://github.com/uesteibar/neuron/commit/ff82f0a)), closes [#25](https://github.com/uesteibar/neuron/issues/25)
+
+
+### BREAKING CHANGES
+
+  - `mutation/1` and `mutation/2` are deprecated
+  - `query/2` is replaced by `query/3` to allow passing variables in
+
+
+
 <a name="0.9.1"></a>
 # [0.9.1](https://github.com/uesteibar/neuron/compare/v0.9.0...v0.9.1) (2018-09-21)
 
