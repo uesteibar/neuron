@@ -25,23 +25,31 @@ end
 
 ```elixir
 iex> Neuron.Config.set(url: "https://example.com/graph")
-iex> Neuron.Config.set(headers: [hackney: [basic_auth: {"username", "password"}]])
 
 iex> Neuron.query("""
-    {
-      films {
-        title
+      {
+        films {
+          count
+        }
       }
-    }
     """)
 
 # Response will be:
 
-{:ok, %Neuron.Response{body: %{"data" => {"films" => [%{"title" => "A New Hope"}]}}%, status_code: 200, headers: []}}
+{:ok, %Neuron.Response{body: %{"data" => {"films" => { "count": 123 }}}%, status_code: 200, headers: []}}
 
 # You can also run mutations
 
-iex> Neuron.mutation("YourMutation()")
+iex> Neuron.query("""
+      mutation createUser($name: String!) {
+        createUser(name: $name) {
+          id
+          name
+        }
+      }
+    """,
+    %{name: "uesteibar"}
+    )
 ```
 
 More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).

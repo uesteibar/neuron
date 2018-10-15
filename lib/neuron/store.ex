@@ -10,8 +10,8 @@ defmodule Neuron.Store do
   sets neuron application/process environmental variables
 
   ## Examples
-    iex> Neuron.Store.set(:my_key, "value")
-    :ok
+      iex> Neuron.Store.set(:my_key, "value")
+      :ok
   """
   @spec set(key :: atom(), value :: any()) :: :ok
   def set(key, value), do: set(:global, key, value)
@@ -30,10 +30,10 @@ defmodule Neuron.Store do
   returs neuron application/process environmental variables
 
   ## Examples
-    iex> Neuron.Store.set(:my_key, "value")
-    :ok
-    iex> Neuron.Store.get(:my_key)
-    "value"
+      iex> Neuron.Store.set(:my_key, "value")
+      :ok
+      iex> Neuron.Store.get(:my_key)
+      "value"
   """
   @spec get(key :: atom()) :: any()
   def get(key), do: get(:global, key)
@@ -49,8 +49,8 @@ defmodule Neuron.Store do
   deletes neuron application/process environmental variables
 
   ## Examples
-    iex> Neuron.Store.delete(:my_key)
-    :ok
+      iex> Neuron.Store.delete(:my_key)
+      :ok
   """
   @spec delete(key :: atom()) :: any()
   def delete(key), do: delete(:global, key)
@@ -69,8 +69,8 @@ defmodule Neuron.Store do
   gets the context of a given neuron application/process environmental variable
 
   ## Examples
-    iex> Neuron.Store.current_context(:my_key)
-    :global
+      iex> Neuron.Store.current_context(:my_key)
+      :global
   """
   @spec current_context(key :: atom()) :: :global | :process
   def current_context(key) do
