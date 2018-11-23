@@ -1,7 +1,10 @@
 defmodule Neuron.ResponseTest do
   use ExUnit.Case
 
-  alias Neuron.Response
+  alias Neuron.{
+    Response,
+    JSONParseError
+  }
 
   def build_response(status_code, body) do
     %{
@@ -94,6 +97,23 @@ defmodule Neuron.ResponseTest do
       result = Response.handle({:error, "error message"})
 
       assert result == {:error, "error message"}
+    end
+  end
+
+  describe "when response not json parsable" do
+    test "returns a JSONParseError" do
+      body = "<html><body>This is not the GraphQL URL</body></html>"
+      raw_response = build_response(200, body)
+
+      assert {:error, %JSONParseError{}} = Response.handle({:ok, raw_response})
+    end
+
+    test "includes a response struct for debugging" do
+      body = "<html><body>This is not the GraphQL URL</body></html>"
+      raw_response = build_response(200, body)
+
+      assert {_, %{response: %Response{} = response}} = Response.handle({:ok, raw_response})
+      assert response == {:ok, raw_response}
     end
   end
 end
