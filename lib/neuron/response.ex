@@ -22,9 +22,7 @@ defmodule Neuron.Response do
     end
   end
 
-  def handle({:error, _} = response) do
-    response
-  end
+  def handle({:error, _} = response), do: response
 
   @doc false
   def build_response(%{status_code: 200} = response) do
