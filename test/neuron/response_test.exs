@@ -112,8 +112,11 @@ defmodule Neuron.ResponseTest do
       body = "<html><body>This is not the GraphQL URL</body></html>"
       raw_response = build_response(200, body)
 
-      assert {_, %{response: %Response{} = response}} = Response.handle({:ok, raw_response})
-      assert response == {:ok, raw_response}
+      assert {_, %{response: {:ok, %Response{} = response}}} =
+               Response.handle({:ok, raw_response})
+
+      assert response.body == raw_response.body
+      assert response.headers == raw_response.headers
     end
   end
 end
