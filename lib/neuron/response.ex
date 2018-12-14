@@ -12,33 +12,34 @@ defmodule Neuron.Response do
             headers: nil
 
   @doc false
-  def handle({:ok, %{status_code: 200} = response}) do
+  def handle({:ok, %{status_code: 200} = response}, parse_options) do
     {
       :ok,
       %Response{
         status_code: response.status_code,
-        body: parse_body(response),
+        body: parse_body(response, parse_options),
         headers: response.headers
       }
     }
   end
 
-  def handle({:ok, response}) do
+  def handle({:ok, response}, parse_options) do
     {
       :error,
       %Response{
         status_code: response.status_code,
-        body: parse_body(response),
+        body: parse_body(response, parse_options),
         headers: response.headers
       }
     }
   end
 
-  def handle({:error, response}) do
+  def handle({:error, response}, _parse_options) do
     {:error, response}
   end
 
-  defp parse_body(response) do
-    Poison.decode!(response.body)
+  defp parse_body(response, parse_options) do
+    Poison.decode!(response.body, parse_options)
   end
+
 end
