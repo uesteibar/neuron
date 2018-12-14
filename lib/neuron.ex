@@ -101,7 +101,7 @@ defmodule Neuron do
   defp run(body, options) do
     body
     |> run_query(options)
-    |> Response.handle()
+    |> handle_response(options)
   end
 
   defp run_query(body, options) do
@@ -116,6 +116,11 @@ defmodule Neuron do
     Map.put(body, :variables, variables)
   end
 
+  defp handle_response(response, options) do
+    parse_options = parse_options(options)
+    Response.handle(response, parse_options)
+  end
+
   defp url(options) do
     Keyword.get(options, :url) || Config.get(:url)
   end
@@ -126,5 +131,9 @@ defmodule Neuron do
 
   defp headers(options) do
     Keyword.get(options, :headers, Config.get(:headers) || [])
+  end
+
+  defp parse_options(options) do
+    Keyword.get(options, :parse_options, Config.get(:parse_options) || [])
   end
 end
