@@ -1,5 +1,5 @@
 defmodule Neuron.Response do
-  alias Neuron.Response
+  alias Neuron.{Response, Config}
 
   @moduledoc """
   Struct representation of a query response.
@@ -39,6 +39,10 @@ defmodule Neuron.Response do
   end
 
   defp parse_body(response) do
-    Poison.decode!(response.body)
+    Poison.decode!(response.body, json_response_opts())
+  end
+
+  defp json_response_opts() do
+    Config.get(:json_response_opts) || []
   end
 end

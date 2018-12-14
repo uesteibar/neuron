@@ -36,6 +36,21 @@ defmodule Neuron.ResponseTest do
 
       assert result == {:ok, expected_result}
     end
+
+    test "returns the parsed Response struct with atom keys in the body map", %{
+      response: response
+    } do
+      Neuron.Config.set(json_response_opts: [keys: :atoms])
+      result = Response.handle({:ok, response})
+
+      expected_result = %Response{
+        body: %{:data => %{:users => []}},
+        headers: response.headers,
+        status_code: response.status_code
+      }
+
+      assert result == {:ok, expected_result}
+    end
   end
 
   describe "when successful response but with errors in body" do
