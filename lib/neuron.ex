@@ -117,8 +117,8 @@ defmodule Neuron do
   end
 
   defp handle_response(response, options) do
-    parse_options = parse_options(options)
-    Response.handle(response, parse_options)
+    parsed_options = parse_options(options)
+    Response.handle(response, parsed_options)
   end
 
   defp url(options) do
