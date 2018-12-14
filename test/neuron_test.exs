@@ -28,7 +28,7 @@ defmodule NeuronTest do
                  Connection.post(
                    url,
                    "{\"variables\":{},\"query\":\"{ users { name } }\"}",
-                   json_headers
+                   %{headers: json_headers, connection_opts: []}
                  )
                )
       end
@@ -39,18 +39,22 @@ defmodule NeuronTest do
     test "it takes all configs as arguments", %{json_headers: json_headers} do
       url = "www.example.com/another/graph"
       headers = ["X-test-header": 'my_header']
+      connection_opts = [timeout: 50_000]
 
       with_mock Connection,
         post: fn _url, _body, _headers ->
           {:ok, %{body: ~s/{"data": {"users": []}}/, status_code: 200, headers: []}}
         end do
-        Neuron.query("{ users { name } }", %{}, url: url, headers: headers)
+        Neuron.query("{ users { name } }", %{}, url: url, headers: headers, connection_opts: connection_opts)
 
         assert called(
                  Connection.post(
                    url,
                    "{\"variables\":{},\"query\":\"{ users { name } }\"}",
-                   Keyword.merge(json_headers, headers)
+                   %{
+                     headers: Keyword.merge(json_headers, headers),
+                     connection_opts: connection_opts
+                    }
                  )
                )
       end
