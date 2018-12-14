@@ -39,10 +39,10 @@ defmodule Neuron.Response do
   end
 
   defp parse_body(response) do
-    Poison.decode!(response.body, json_response_opts())
+    Poison.decode!(response.body, parse_options())
   end
 
-  defp json_response_opts() do
-    Config.get(:json_response_opts) || []
+  defp parse_options() do
+    Config.get(:parse_options) || []
   end
 end

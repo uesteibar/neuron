@@ -40,9 +40,9 @@ defmodule Neuron.ResponseTest do
     test "returns the parsed Response struct with atom keys in the body map", %{
       response: response
     } do
-      Neuron.Config.set(json_response_opts: [keys: :atoms])
+      Neuron.Config.set(parse_options: [keys: :atoms])
       result = Response.handle({:ok, response})
-      Neuron.Config.set(json_response_opts: nil)
+      Neuron.Config.set(parse_options: nil)
 
       expected_result = %Response{
         body: %{:data => %{:users => []}},

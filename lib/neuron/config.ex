@@ -35,7 +35,7 @@ defmodule Neuron.Config do
       iex> Neuron.Config.set(:process, url: "http://example.com/graph")
       :ok
 
-      iex> Neuron.Config.set(json_response_opts: [keys: :atoms])
+      iex> Neuron.Config.set(parse_options: [keys: :atoms])
       :ok
   """
 
@@ -43,7 +43,7 @@ defmodule Neuron.Config do
   def set(context, value)
 
   def set(:global, nil) do
-    [:neuron_url, :neuron_headers, :neuron_connection_opts, :neuron_json_response_opts]
+    [:neuron_url, :neuron_headers, :neuron_connection_opts, :neuron_parse_options]
     |> Enum.map(&Store.delete(:global, &1))
   end
 
@@ -51,8 +51,8 @@ defmodule Neuron.Config do
   def set(context, headers: value), do: Store.set(context, :neuron_headers, value)
   def set(context, connection_opts: value), do: Store.set(context, :neuron_connection_opts, value)
 
-  def set(context, json_response_opts: value),
-    do: Store.set(context, :neuron_json_response_opts, value)
+  def set(context, parse_options: value),
+    do: Store.set(context, :neuron_parse_options, value)
 
   @doc """
   gets configuration value for Neuron
@@ -76,7 +76,7 @@ defmodule Neuron.Config do
   def get(:headers), do: get(:neuron_headers)
   def get(:url), do: get(:neuron_url)
   def get(:connection_opts), do: get(:neuron_connection_opts)
-  def get(:json_response_opts), do: get(:neuron_json_response_opts)
+  def get(:parse_options), do: get(:neuron_parse_options)
 
   def get(key) do
     key
