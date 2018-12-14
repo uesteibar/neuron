@@ -42,6 +42,7 @@ defmodule Neuron.ResponseTest do
     } do
       Neuron.Config.set(json_response_opts: [keys: :atoms])
       result = Response.handle({:ok, response})
+      Neuron.Config.set(json_response_opts: nil)
 
       expected_result = %Response{
         body: %{:data => %{:users => []}},
