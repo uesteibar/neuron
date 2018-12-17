@@ -107,7 +107,8 @@ defmodule Neuron do
   defp run_query(body, options) do
     url = url(options)
     headers = build_headers(options)
-    Connection.post(url, body, headers)
+    connection_opts = connection_options(options)
+    Connection.post(url, body, %{headers: headers, connection_opts: connection_opts})
   end
 
   defp build_body(query_string), do: %{query: query_string}
@@ -135,5 +136,9 @@ defmodule Neuron do
 
   defp parse_options(options) do
     Keyword.get(options, :parse_options, Config.get(:parse_options) || [])
+  end
+
+  defp connection_options(options) do
+    Keyword.get(options, :connection_opts, Config.get(:connection_opts) || [])
   end
 end

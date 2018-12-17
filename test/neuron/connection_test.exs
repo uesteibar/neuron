@@ -16,15 +16,14 @@ defmodule Neuron.ConnectionTest do
         post: fn _url, _query, _headers, _opts ->
           %HTTPoison.Response{}
         end do
-        Connection.post(url, query, hackney: [basic_auth: [user: "password"]])
+        headers = [hackney: [basic_auth: [user: "password"]]]
+        Connection.post(url, query, %{headers: headers, connection_opts: []})
 
         assert called(
                  HTTPoison.post(
                    url,
                    query,
-                   [
-                     hackney: [basic_auth: [user: "password"]]
-                   ],
+                   headers,
                    []
                  )
                )
@@ -36,8 +35,8 @@ defmodule Neuron.ConnectionTest do
         post: fn _url, _query, _headers, _opts ->
           %HTTPoison.Response{}
         end do
-        Neuron.Config.set(connection_opts: [timeout: 50_000])
-        Connection.post(url, query, [])
+        connection_opts = [timeout: 50_000]
+        Connection.post(url, query, %{headers: [], connection_opts: connection_opts})
 
         assert called(HTTPoison.post(url, query, [], timeout: 50_000))
       end
