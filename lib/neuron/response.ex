@@ -15,14 +15,16 @@ defmodule Neuron.Response do
             headers: nil
 
   @doc false
-  def handle({:ok, response}) do
-    case Poison.decode(response.body) do
+  def handle(response, parse_options \\ [])
+
+  def handle({:ok, response}, parse_options) do
+    case Poison.decode(response.body, parse_options) do
       {:ok, body} -> build_response(%{response | body: body})
       {:error, error} -> handle_unparsable(response, error)
     end
   end
 
-  def handle({:error, _} = response), do: response
+  def handle({:error, _} = response, _), do: response
 
   @doc false
   def build_response(%{status_code: 200} = response) do

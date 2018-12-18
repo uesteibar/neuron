@@ -101,19 +101,25 @@ defmodule Neuron do
   defp run(body, options) do
     body
     |> run_query(options)
-    |> Response.handle()
+    |> handle_response(options)
   end
 
   defp run_query(body, options) do
     url = url(options)
     headers = build_headers(options)
-    Connection.post(url, body, headers)
+    connection_opts = connection_options(options)
+    Connection.post(url, body, %{headers: headers, connection_opts: connection_opts})
   end
 
   defp build_body(query_string), do: %{query: query_string}
 
   defp insert_variables(body, variables) do
     Map.put(body, :variables, variables)
+  end
+
+  defp handle_response(response, options) do
+    parsed_options = parse_options(options)
+    Response.handle(response, parsed_options)
   end
 
   defp url(options) do
@@ -126,5 +132,13 @@ defmodule Neuron do
 
   defp headers(options) do
     Keyword.get(options, :headers, Config.get(:headers) || [])
+  end
+
+  defp parse_options(options) do
+    Keyword.get(options, :parse_options, Config.get(:parse_options) || [])
+  end
+
+  defp connection_options(options) do
+    Keyword.get(options, :connection_opts, Config.get(:connection_opts) || [])
   end
 end

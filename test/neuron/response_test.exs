@@ -29,10 +29,24 @@ defmodule Neuron.ResponseTest do
     end
 
     test "returns the parsed Response struct", %{response: response} do
-      result = Response.handle({:ok, response})
+      result = Response.handle({:ok, response}, [])
 
       expected_result = %Response{
         body: %{"data" => %{"users" => []}},
+        headers: response.headers,
+        status_code: response.status_code
+      }
+
+      assert result == {:ok, expected_result}
+    end
+
+    test "returns the parsed Response struct with atom keys in the body map", %{
+      response: response
+    } do
+      result = Response.handle({:ok, response}, [keys: :atoms])
+
+      expected_result = %Response{
+        body: %{:data => %{:users => []}},
         headers: response.headers,
         status_code: response.status_code
       }
@@ -49,7 +63,7 @@ defmodule Neuron.ResponseTest do
     end
 
     test "returns the parsed Response struct", %{response: response} do
-      result = Response.handle({:ok, response})
+      result = Response.handle({:ok, response}, [])
 
       expected_result = %Response{
         body: %{"data" => nil, "errors" => "stuff"},
@@ -73,7 +87,7 @@ defmodule Neuron.ResponseTest do
     end
 
     test "returns the parsed Response struct with errors", %{response: response} do
-      result = Response.handle({:ok, response})
+      result = Response.handle({:ok, response}, [])
 
       expected_result = %Response{
         body: %{
@@ -94,7 +108,7 @@ defmodule Neuron.ResponseTest do
 
   describe "when error" do
     test "returns the error" do
-      result = Response.handle({:error, "error message"})
+      result = Response.handle({:error, "error message"}, [])
 
       assert result == {:error, "error message"}
     end
