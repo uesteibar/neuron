@@ -21,6 +21,7 @@ defmodule Neuron.Response do
     case Poison.decode(response.body, parse_options) do
       {:ok, body} -> build_response(%{response | body: body})
       {:error, error} -> handle_unparsable(response, error)
+      {:error, error, _} -> handle_unparsable(response, error)
     end
   end
 
