@@ -1,5 +1,8 @@
 defmodule Neuron.Response do
-  alias Neuron.Response
+  alias Neuron.{
+    Response,
+    JSONParseError
+  }
 
   @moduledoc """
   Struct representation of a query response.
@@ -12,34 +15,48 @@ defmodule Neuron.Response do
             headers: nil
 
   @doc false
-  def handle({:ok, %{status_code: 200} = response}, parse_options) do
+  def handle(response, parse_options \\ [])
+
+  def handle({:ok, response}, parse_options) do
+    case Poison.decode(response.body, parse_options) do
+      {:ok, body} -> build_response(%{response | body: body})
+      {:error, error} -> handle_unparsable(response, error)
+      {:error, error, _} -> handle_unparsable(response, error)
+    end
+  end
+
+  def handle({:error, _} = response, _), do: response
+
+  @doc false
+  def build_response(%{status_code: 200} = response) do
     {
       :ok,
       %Response{
         status_code: response.status_code,
-        body: parse_body(response, parse_options),
+        body: response.body,
         headers: response.headers
       }
     }
   end
 
-  def handle({:ok, response}, parse_options) do
+  def build_response(response) do
     {
       :error,
       %Response{
         status_code: response.status_code,
-        body: parse_body(response, parse_options),
+        body: response.body,
         headers: response.headers
       }
     }
   end
 
-  def handle({:error, response}, _parse_options) do
-    {:error, response}
+  def handle_unparsable(response, error) do
+    {
+      :error,
+      %JSONParseError{
+        response: build_response(response),
+        error: error
+      }
+    }
   end
-
-  defp parse_body(response, parse_options) do
-    Poison.decode!(response.body, parse_options)
-  end
-
 end
