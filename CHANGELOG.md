@@ -1,3 +1,15 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/uesteibar/neuron/compare/v1.0.0...v) (2018-12-25)
+
+
+### Features
+
+* **decode:** Add support for passing options to the json decoder ([#29](https://github.com/uesteibar/neuron/issues/29)) ([f8425ac](https://github.com/uesteibar/neuron/commit/f8425ac))
+* **options:** Allow to override connection options per request ([#30](https://github.com/uesteibar/neuron/issues/30)) ([30d99e5](https://github.com/uesteibar/neuron/commit/30d99e5))
+* **response:** return a meaningful error when response is not JSON ([#27](https://github.com/uesteibar/neuron/issues/27)) ([32004b2](https://github.com/uesteibar/neuron/commit/32004b2))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/uesteibar/neuron/compare/v0.9.1...v1.0.0) (2018-10-15)
 
