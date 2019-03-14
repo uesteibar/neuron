@@ -43,7 +43,7 @@ defmodule Neuron.ResponseTest do
     test "returns the parsed Response struct with atom keys in the body map", %{
       response: response
     } do
-      result = Response.handle({:ok, response}, [keys: :atoms])
+      result = Response.handle({:ok, response}, keys: :atoms)
 
       expected_result = %Response{
         body: %{:data => %{:users => []}},

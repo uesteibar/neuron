@@ -45,7 +45,11 @@ defmodule NeuronTest do
         post: fn _url, _body, _headers ->
           {:ok, %{body: ~s/{"data": {"users": []}}/, status_code: 200, headers: []}}
         end do
-        Neuron.query("{ users { name } }", %{}, url: url, headers: headers, connection_opts: connection_opts)
+        Neuron.query("{ users { name } }", %{},
+          url: url,
+          headers: headers,
+          connection_opts: connection_opts
+        )
 
         assert called(
                  Connection.post(
@@ -54,7 +58,7 @@ defmodule NeuronTest do
                    %{
                      headers: Keyword.merge(json_headers, headers),
                      connection_opts: connection_opts
-                    }
+                   }
                  )
                )
       end
