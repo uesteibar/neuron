@@ -1,3 +1,13 @@
+<a name="1.1.1"></a>
+# [1.1.1](https://github.com/uesteibar/neuron/compare/v1.1.0...v) (2019-03-14)
+
+
+### Bug Fixes
+
+* **typespecs:** Fix typespec for `Neuron.query/3` ([e267f8c](https://github.com/uesteibar/neuron/commit/e267f8c)), closes [#31](https://github.com/uesteibar/neuron/issues/31)
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/uesteibar/neuron/compare/v1.0.0...v1.1.0) (2018-12-25)
 
