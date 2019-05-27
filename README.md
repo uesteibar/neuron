@@ -50,6 +50,21 @@ iex> Neuron.query("""
     """,
     %{name: "uesteibar"}
     )
+
+# You can also set url and headers as shown below
+
+iex> Neuron.query("""
+      mutation createUser($name: String!) {
+        createUser(name: $name) {
+          id
+          name
+        }
+      }
+    """,
+    %{name: "uesteibar"},
+    url: "https://example.com/graph",
+    headers: [authorization: "Bearer <token>"]
+    )
 ```
 
 More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
