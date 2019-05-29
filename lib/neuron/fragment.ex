@@ -29,18 +29,22 @@ defmodule Neuron.Fragment do
     fragment_name = Regex.run(~r/^(?:\W*)(\w+)/, query_string) |> List.last() |> String.to_atom()
 
     fragment = query_string |> construct_fragment_string
+    dependencies = fragment |> find_in_query()
 
-    {fragment_name, fragment}
+    {fragment_name, {fragment, dependencies}}
   end
 
   @doc false
   def insert_into_query(query_string) do
     stored_fragments = Store.get(:global, :fragments, []) ++ Store.get(:process, :fragments, [])
 
-    fragments_to_add =
-      query_string
+    fragments_to_add = query_string
       |> find_in_query
       |> Enum.map(&List.keyfind(stored_fragments, &1, 0, &1))
+
+    fragments_to_add = fragments_to_add
+      |> Enum.reject(&is_atom/1)
+      |> Enum.reduce(fragments_to_add, &load_missing_fragments(&1, stored_fragments, &2))
 
     missing_fragments = fragments_to_add |> Enum.filter(&is_atom/1) |> Enum.map(&Atom.to_string/1)
 
@@ -48,6 +52,7 @@ defmodule Neuron.Fragment do
 
     fragments_to_add
     |> Enum.map(&elem(&1, 1))
+    |> Enum.map(&elem(&1, 0))
     |> Enum.reduce(query_string, &"#{&1} \n #{&2}")
   end
 
@@ -59,5 +64,27 @@ defmodule Neuron.Fragment do
 
   defp construct_fragment_string(fragment_string) do
     "fragment #{fragment_string}"
+  end
+
+  defp load_missing_fragments({_, {_, []}}, _available, loaded), do: loaded
+
+  defp load_missing_fragments({_, {_, [name]}}, available, loaded), do:
+    load_fragment(name, available, loaded)
+
+  defp load_missing_fragments({_, {_, extra}}, available, loaded) do
+    extra |> Enum.reduce(loaded, &load_fragment(&1, available, &2))
+  end
+
+  defp load_fragment(name, available, loaded) do
+    loaded
+    |> Keyword.get(name)
+    |> case do
+      nil -> List.keyfind(available, name, 0, name)
+        |> case do
+          {^name, _}=fragment -> load_missing_fragments(fragment, available, [fragment | loaded])
+          ^name -> [name | loaded]
+        end
+      _ -> loaded
+    end
   end
 end
