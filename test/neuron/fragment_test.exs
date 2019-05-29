@@ -11,6 +11,27 @@ defmodule Neuron.FragmentTest do
     }
   """
 
+  @test_embedding_fragment """
+    Name for Person {
+      firstName
+      lastName
+      ...Age
+    }
+  """
+
+  @test_embedded_fragment """
+    Age for Person {
+      years
+    }
+  """
+
+  @test_recursive_fragment """
+    MemberDetails for Person {
+      ...Age
+      ...Name
+    }
+  """
+
   @test_query_without_fragment """
     query users {
       firstName,
@@ -21,6 +42,13 @@ defmodule Neuron.FragmentTest do
   @test_query_with_fragment """
     query users {
       ...Name
+    }
+  """
+
+  @test_query_with_recursive_fragment """
+    query users {
+      ...Name
+      ...MemberDetails
     }
   """
 
@@ -45,7 +73,7 @@ defmodule Neuron.FragmentTest do
     setup [:clear_stored_fragments, :register_name_fragment]
 
     test "fragments are retrievable by name" do
-      assert Neuron.Store.get(:fragments) |> Keyword.get(:Name) == "fragment #{@test_fragment}"
+      assert Neuron.Store.get(:fragments) |> Keyword.get(:Name) == {"fragment #{@test_fragment}", []}
     end
 
     test "correct fragments are inserted into queries" do
@@ -64,8 +92,42 @@ defmodule Neuron.FragmentTest do
     end
   end
 
+  describe "when query contains embedded fragments" do
+    setup [:clear_stored_fragments, :register_embedded_fragments]
+
+    test "correct fragments are inserted into queries" do
+      resolved = Fragment.insert_into_query(@test_query_with_fragment)
+
+      assert String.contains?(resolved, "fragment #{@test_embedded_fragment}")
+      assert String.contains?(resolved, "fragment #{@test_embedding_fragment}")
+      assert String.contains?(resolved, @test_query_with_fragment)
+    end
+
+    test "nested fragments are embedded recursively" do
+      resolved = Fragment.insert_into_query(@test_query_with_recursive_fragment)
+
+      assert String.contains?(resolved, "fragment #{@test_embedded_fragment}")
+      assert String.contains?(resolved, "fragment #{@test_embedding_fragment}")
+      assert String.contains?(resolved, "fragment #{@test_recursive_fragment}")
+      assert String.contains?(resolved, @test_query_with_recursive_fragment)
+      assert Regex.scan(~r/fragment\s+Name/, resolved) |> length() == 1
+    end
+
+    test "fragments are deduplicated when referenced more than once" do
+      resolved = Fragment.insert_into_query(@test_query_with_recursive_fragment)
+
+      assert Regex.scan(~r/fragment\s+Name/, resolved) |> length() == 1
+    end
+  end
+
   defp register_name_fragment(_context) do
     Fragment.register(@test_fragment)
+  end
+
+  defp register_embedded_fragments(_context) do
+    Fragment.register(@test_embedded_fragment)
+    Fragment.register(@test_embedding_fragment)
+    Fragment.register(@test_recursive_fragment)
   end
 
   defp clear_stored_fragments(_context) do
