@@ -1,5 +1,15 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/uesteibar/neuron/compare/v1.1.1...v1.2.0) (2019-05-30)
+
+
+### Features
+
+* **fragment:** recursively embed fragments ([3807d89](https://github.com/uesteibar/neuron/commit/3807d89))
+
+
+
 <a name="1.1.1"></a>
-# [1.1.1](https://github.com/uesteibar/neuron/compare/v1.1.0...v) (2019-03-14)
+# [1.1.1](https://github.com/uesteibar/neuron/compare/v1.1.0...v1.1.1) (2019-03-14)
 
 
 ### Bug Fixes
