@@ -9,7 +9,7 @@ defmodule Neuron.Mixfile do
       app: :neuron,
       description: "A GraphQL client for elixir.",
       version: @version,
-      elixir: "~> 1.3",
+      elixir: "~> 1.6",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: Coverex.Task],
@@ -28,9 +28,9 @@ defmodule Neuron.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 1.0"},
-      {:poison, "~> 3.1"},
-      {:mock, "~> 0.3.1", only: :test},
-      {:coverex, "~> 1.4", only: :test},
+      {:poison, "~> 4.0"},
+      {:mock, "~> 0.3.3", only: :test},
+      {:coverex, "~> 1.5", only: :test},
       {:credo, "~> 0.3", only: [:dev, :test]},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
