@@ -1,3 +1,18 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/uesteibar/neuron/compare/v1.2.0...v2.0.0) (2019-06-26)
+
+
+### chore
+
+* **deps:** Update poison to 4.0, mock to 0.3.3 and coverex to 1.5 ([600db92](https://github.com/uesteibar/neuron/commit/600db92))
+
+
+### BREAKING CHANGES
+
+* Now requires elixir >= 1.6
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/uesteibar/neuron/compare/v1.1.1...v1.2.0) (2019-05-30)
 
