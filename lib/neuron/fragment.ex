@@ -48,7 +48,7 @@ defmodule Neuron.Fragment do
 
     missing_fragments = fragments_to_add |> Enum.filter(&is_atom/1) |> Enum.map(&Atom.to_string/1)
 
-    if Enum.any?(missing_fragments), do: raise("Fragments #{missing_fragments} not found")
+    if Enum.any?(missing_fragments), do: raise("Fragments #{Enum.join(missing_fragments, ", ")} not found")
 
     fragments_to_add
     |> Enum.map(&elem(&1, 1))
