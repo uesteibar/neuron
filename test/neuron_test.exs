@@ -8,15 +8,17 @@ defmodule NeuronTest do
   setup do
     url = "www.example.com/graph"
     json_headers = ["Content-Type": "application/json"]
+    json_library = Jason
     Neuron.Config.set(nil)
     Neuron.Config.set(url: url)
-    %{url: url, json_headers: json_headers}
+    %{url: url, json_headers: json_headers, json_library: json_library}
   end
 
   describe "query/1" do
     test "calls the connection with correct url and query string", %{
       url: url,
-      json_headers: json_headers
+      json_headers: json_headers,
+      json_library: json_library
     } do
       with_mock Connection,
         post: fn _url, _body, _headers ->
@@ -27,7 +29,7 @@ defmodule NeuronTest do
         assert called(
                  Connection.post(
                    url,
-                   "{\"variables\":{},\"query\":\"{ users { name } }\"}",
+                   json_library.encode!(%{query: "{ users { name } }", variables: %{}}),
                    %{headers: json_headers, connection_opts: []}
                  )
                )
@@ -36,7 +38,10 @@ defmodule NeuronTest do
   end
 
   describe "query/2" do
-    test "it takes all configs as arguments", %{json_headers: json_headers} do
+    test "it takes all configs as arguments", %{
+      json_headers: json_headers,
+      json_library: json_library
+    } do
       url = "www.example.com/another/graph"
       headers = ["X-test-header": 'my_header']
       connection_opts = [timeout: 50_000]
@@ -48,13 +53,14 @@ defmodule NeuronTest do
         Neuron.query("{ users { name } }", %{},
           url: url,
           headers: headers,
-          connection_opts: connection_opts
+          connection_opts: connection_opts,
+          json_library: json_library
         )
 
         assert called(
                  Connection.post(
                    url,
-                   "{\"variables\":{},\"query\":\"{ users { name } }\"}",
+                   json_library.encode!(%{query: "{ users { name } }", variables: %{}}),
                    %{
                      headers: Keyword.merge(json_headers, headers),
                      connection_opts: connection_opts

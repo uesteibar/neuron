@@ -6,6 +6,10 @@ defmodule Neuron.ResponseTest do
     JSONParseError
   }
 
+  setup_all do
+    %{json_library: Jason}
+  end
+
   def build_response(status_code, body) do
     %{
       body: body,
@@ -28,8 +32,8 @@ defmodule Neuron.ResponseTest do
       }
     end
 
-    test "returns the parsed Response struct", %{response: response} do
-      result = Response.handle({:ok, response}, [])
+    test "returns the parsed Response struct", %{response: response, json_library: json_library} do
+      result = Response.handle({:ok, response}, json_library, [])
 
       expected_result = %Response{
         body: %{"data" => %{"users" => []}},
@@ -41,9 +45,10 @@ defmodule Neuron.ResponseTest do
     end
 
     test "returns the parsed Response struct with atom keys in the body map", %{
-      response: response
+      response: response,
+      json_library: json_library
     } do
-      result = Response.handle({:ok, response}, keys: :atoms)
+      result = Response.handle({:ok, response}, json_library, keys: :atoms)
 
       expected_result = %Response{
         body: %{:data => %{:users => []}},
@@ -62,8 +67,8 @@ defmodule Neuron.ResponseTest do
       }
     end
 
-    test "returns the parsed Response struct", %{response: response} do
-      result = Response.handle({:ok, response}, [])
+    test "returns the parsed Response struct", %{response: response, json_library: json_library} do
+      result = Response.handle({:ok, response}, json_library, [])
 
       expected_result = %Response{
         body: %{"data" => nil, "errors" => "stuff"},
@@ -86,8 +91,11 @@ defmodule Neuron.ResponseTest do
       }
     end
 
-    test "returns the parsed Response struct with errors", %{response: response} do
-      result = Response.handle({:ok, response}, [])
+    test "returns the parsed Response struct with errors", %{
+      response: response,
+      json_library: json_library
+    } do
+      result = Response.handle({:ok, response}, json_library, [])
 
       expected_result = %Response{
         body: %{
@@ -107,27 +115,27 @@ defmodule Neuron.ResponseTest do
   end
 
   describe "when error" do
-    test "returns the error" do
-      result = Response.handle({:error, "error message"}, [])
+    test "returns the error", %{json_library: json_library} do
+      result = Response.handle({:error, "error message"}, json_library, [])
 
       assert result == {:error, "error message"}
     end
   end
 
   describe "when response not json parsable" do
-    test "returns a JSONParseError" do
+    test "returns a JSONParseError", %{json_library: json_library} do
       body = "<html><body>This is not the GraphQL URL</body></html>"
       raw_response = build_response(200, body)
 
-      assert {:error, %JSONParseError{}} = Response.handle({:ok, raw_response})
+      assert {:error, %JSONParseError{}} = Response.handle({:ok, raw_response}, json_library)
     end
 
-    test "includes a response struct for debugging" do
+    test "includes a response struct for debugging", %{json_library: json_library} do
       body = "<html><body>This is not the GraphQL URL</body></html>"
       raw_response = build_response(200, body)
 
       assert {_, %{response: {:ok, %Response{} = response}}} =
-               Response.handle({:ok, raw_response})
+               Response.handle({:ok, raw_response}, json_library)
 
       assert response.body == raw_response.body
       assert response.headers == raw_response.headers
