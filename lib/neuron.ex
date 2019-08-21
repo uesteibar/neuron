@@ -100,6 +100,18 @@ defmodule Neuron do
     |> run(options)
   end
 
+  @doc """
+  Returns the JSON library that is configured in Neuron. Default is Jason.
+  """
+  @spec json_library :: module()
+  def json_library() do
+    Config.get(:json_library) || Jason
+  end
+
+  defp json_library(options) do
+    Keyword.get(options, :json_library, json_library())
+  end
+
   defp run(body, options) do
     body
     |> run_query(options)
@@ -135,10 +147,6 @@ defmodule Neuron do
 
   defp headers(options) do
     Keyword.get(options, :headers, Config.get(:headers) || [])
-  end
-
-  defp json_library(options) do
-    Keyword.get(options, :json_library, Config.get(:json_library) || Jason)
   end
 
   defp parse_options(options) do
