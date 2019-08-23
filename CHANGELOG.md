@@ -1,3 +1,21 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/uesteibar/neuron/compare/v2.0.0...v3.0.0) (2019-08-23)
+
+
+### Features
+
+* **json:** Use Jason as default JSOn library ([3b4e472](https://github.com/uesteibar/neuron/commit/3b4e472))
+
+
+### BREAKING CHANGES
+
+* **json:** JSON parsing library is now [Jason](https://github.com/michalmuskala/jason).
+In order to keep using [Poison](https://github.com/devinus/poison)
+you'll need to manually add it as a dependency and configure neuron to
+use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/uesteibar/neuron/compare/v1.2.0...v2.0.0) (2019-06-26)
 
