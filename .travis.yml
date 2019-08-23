@@ -7,7 +7,7 @@ elixir:
 
 jobs:
   include:
-    - stage: check style guide
+    - stage: lint
       elixir: 1.9.1
       script:
         - mix format --check-formatted
