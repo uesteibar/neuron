@@ -90,12 +90,26 @@ defmodule Neuron do
   @spec query(query_string :: String.t(), variables :: Map.t(), options :: keyword()) ::
           {:ok, Neuron.Response.t()} | {:error, Neuron.Response.t() | Neuron.JSONParseError.t()}
   def query(query_string, variables \\ %{}, options \\ []) do
+    json_library = json_library(options)
+
     query_string
     |> Fragment.insert_into_query()
     |> build_body()
     |> insert_variables(variables)
-    |> Poison.encode!()
+    |> json_library.encode!()
     |> run(options)
+  end
+
+  @doc """
+  Returns the JSON library that is configured in Neuron. Default is Jason.
+  """
+  @spec json_library :: module()
+  def json_library() do
+    Config.get(:json_library) || Jason
+  end
+
+  defp json_library(options) do
+    Keyword.get(options, :json_library, json_library())
   end
 
   defp run(body, options) do
@@ -118,8 +132,9 @@ defmodule Neuron do
   end
 
   defp handle_response(response, options) do
+    json_library = json_library(options)
     parsed_options = parse_options(options)
-    Response.handle(response, parsed_options)
+    Response.handle(response, json_library, parsed_options)
   end
 
   defp url(options) do

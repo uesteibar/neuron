@@ -12,13 +12,26 @@ A GraphQL client for Elixir.
 - [Running Locally](#running-locally)
 - [Contributing](#contributing)
 
-
 ## Installation
 
 ```elixir
 def deps do
   [{:neuron, "~> 2.0.0"}]
 end
+```
+
+## JSON library
+
+Neuron defaults to using Jason for JSON encoding and decoding. To use Jason, add it to your deps
+
+```elixir
+{:jason, "~> 1.1"}
+```
+
+It is also possible to customize which JSON library that is used
+
+```elixir
+Neuron.Config.set(json_library: AnotherJSONLibrary)
 ```
 
 ## Usage
@@ -72,22 +85,26 @@ More extensive documentation can be found at [https://hexdocs.pm/neuron](https:/
 ## Running locally
 
 Clone the repository
+
 ```bash
 git clone git@github.com:uesteibar/neuron.git
 ```
 
 Install dependencies
+
 ```bash
 cd neuron
 mix deps.get
 ```
 
 To run the tests
+
 ```bash
 mix test
 ```
 
 To run the lint
+
 ```elixir
 mix credo
 ```
@@ -102,17 +119,21 @@ For that reason every contribution should have a title and body that follows the
 To make this process easier, you can do the following:
 
 Install `commitizen` and `cz-conventional-changelog` globally
+
 ```bash
 npm i -g commitizen cz-conventional-changelog
 ```
 
 Save `cz-conventional-changelog` as default
+
 ```bash
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
 Instead of `git commit`, you can now run
+
 ```
 git cz
 ```
+
 and follow the instructions to generate the commit message.

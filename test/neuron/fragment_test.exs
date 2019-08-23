@@ -73,7 +73,8 @@ defmodule Neuron.FragmentTest do
     setup [:clear_stored_fragments, :register_name_fragment]
 
     test "fragments are retrievable by name" do
-      assert Neuron.Store.get(:fragments) |> Keyword.get(:Name) == {"fragment #{@test_fragment}", []}
+      assert Neuron.Store.get(:fragments) |> Keyword.get(:Name) ==
+               {"fragment #{@test_fragment}", []}
     end
 
     test "correct fragments are inserted into queries" do
