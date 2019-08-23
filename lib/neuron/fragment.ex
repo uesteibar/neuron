@@ -1,6 +1,10 @@
 defmodule Neuron.Fragment do
   alias Neuron.Store
 
+  @moduledoc """
+  This module can be used to register fragments to be used in your GraphQL queries
+  """
+
   @doc ~S"""
   registers a fragment that will automatically be added to future mutations and queries that require it
 
