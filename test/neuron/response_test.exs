@@ -6,6 +6,8 @@ defmodule Neuron.ResponseTest do
     JSONParseError
   }
 
+  @json_libraries [Jason, Poison]
+
   def build_response(status_code, body) do
     %{
       body: body,
@@ -28,30 +30,39 @@ defmodule Neuron.ResponseTest do
       }
     end
 
-    test "returns the parsed Response struct", %{response: response} do
-      result = Response.handle({:ok, response}, [])
+    for json_library <- @json_libraries do
+      test "returns the parsed Response struct using #{json_library}", %{response: response} do
+        json_library = unquote(json_library)
+        result = Response.handle({:ok, response}, json_library, [])
 
-      expected_result = %Response{
-        body: %{"data" => %{"users" => []}},
-        headers: response.headers,
-        status_code: response.status_code
-      }
+        expected_result = %Response{
+          body: %{"data" => %{"users" => []}},
+          headers: response.headers,
+          status_code: response.status_code
+        }
 
-      assert result == {:ok, expected_result}
+        assert result == {:ok, expected_result}
+      end
     end
 
-    test "returns the parsed Response struct with atom keys in the body map", %{
-      response: response
-    } do
-      result = Response.handle({:ok, response}, keys: :atoms)
+    for json_library <- @json_libraries do
+      test "returns the parsed Response struct with atom keys in the body map using #{
+             json_library
+           }",
+           %{
+             response: response
+           } do
+        json_library = unquote(json_library)
+        result = Response.handle({:ok, response}, json_library, keys: :atoms)
 
-      expected_result = %Response{
-        body: %{:data => %{:users => []}},
-        headers: response.headers,
-        status_code: response.status_code
-      }
+        expected_result = %Response{
+          body: %{:data => %{:users => []}},
+          headers: response.headers,
+          status_code: response.status_code
+        }
 
-      assert result == {:ok, expected_result}
+        assert result == {:ok, expected_result}
+      end
     end
   end
 
@@ -62,16 +73,21 @@ defmodule Neuron.ResponseTest do
       }
     end
 
-    test "returns the parsed Response struct", %{response: response} do
-      result = Response.handle({:ok, response}, [])
+    for json_library <- @json_libraries do
+      test "returns the parsed Response struct using #{json_library}", %{
+        response: response
+      } do
+        json_library = unquote(json_library)
+        result = Response.handle({:ok, response}, json_library, [])
 
-      expected_result = %Response{
-        body: %{"data" => nil, "errors" => "stuff"},
-        headers: response.headers,
-        status_code: response.status_code
-      }
+        expected_result = %Response{
+          body: %{"data" => nil, "errors" => "stuff"},
+          headers: response.headers,
+          status_code: response.status_code
+        }
 
-      assert result == {:ok, expected_result}
+        assert result == {:ok, expected_result}
+      end
     end
   end
 
@@ -86,51 +102,65 @@ defmodule Neuron.ResponseTest do
       }
     end
 
-    test "returns the parsed Response struct with errors", %{response: response} do
-      result = Response.handle({:ok, response}, [])
+    for json_library <- @json_libraries do
+      test "returns the parsed Response struct with errors using #{json_library}", %{
+        response: response
+      } do
+        json_library = unquote(json_library)
+        result = Response.handle({:ok, response}, json_library, [])
 
-      expected_result = %Response{
-        body: %{
-          "errors" => [
-            %{
-              "locations" => [%{"column" => 11, "line" => 3}],
-              "message" => "Cannot query field \"nam\" on type \"User\". Did you mean \"name\"?"
-            }
-          ]
-        },
-        headers: response.headers,
-        status_code: response.status_code
-      }
+        expected_result = %Response{
+          body: %{
+            "errors" => [
+              %{
+                "locations" => [%{"column" => 11, "line" => 3}],
+                "message" => "Cannot query field \"nam\" on type \"User\". Did you mean \"name\"?"
+              }
+            ]
+          },
+          headers: response.headers,
+          status_code: response.status_code
+        }
 
-      assert result == {:error, expected_result}
+        assert result == {:error, expected_result}
+      end
     end
   end
 
   describe "when error" do
-    test "returns the error" do
-      result = Response.handle({:error, "error message"}, [])
+    for json_library <- @json_libraries do
+      test "returns the error using #{json_library}" do
+        json_library = unquote(json_library)
+        result = Response.handle({:error, "error message"}, json_library, [])
 
-      assert result == {:error, "error message"}
+        assert result == {:error, "error message"}
+      end
     end
   end
 
   describe "when response not json parsable" do
-    test "returns a JSONParseError" do
-      body = "<html><body>This is not the GraphQL URL</body></html>"
-      raw_response = build_response(200, body)
+    for json_library <- @json_libraries do
+      test "returns a JSONParseError using #{json_library}" do
+        json_library = unquote(json_library)
+        body = "<html><body>This is not the GraphQL URL</body></html>"
+        raw_response = build_response(200, body)
 
-      assert {:error, %JSONParseError{}} = Response.handle({:ok, raw_response})
+        assert {:error, %JSONParseError{}} = Response.handle({:ok, raw_response}, json_library)
+      end
     end
 
-    test "includes a response struct for debugging" do
-      body = "<html><body>This is not the GraphQL URL</body></html>"
-      raw_response = build_response(200, body)
+    for json_library <- @json_libraries do
+      test "includes a response struct for debugging using #{json_library}" do
+        json_library = unquote(json_library)
+        body = "<html><body>This is not the GraphQL URL</body></html>"
+        raw_response = build_response(200, body)
 
-      assert {_, %{response: {:ok, %Response{} = response}}} =
-               Response.handle({:ok, raw_response})
+        assert {_, %{response: {:ok, %Response{} = response}}} =
+                 Response.handle({:ok, raw_response}, json_library)
 
-      assert response.body == raw_response.body
-      assert response.headers == raw_response.headers
+        assert response.body == raw_response.body
+        assert response.headers == raw_response.headers
+      end
     end
   end
 end
