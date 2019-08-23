@@ -26,6 +26,8 @@ defmodule Neuron.Config do
   - url: graphql endpoint url
   - headers: headers to be sent in the request
   - connection_opts: additional options to be passed to HTTPoison
+  - json_library: JSON library. Default is Jason.
+  - parse_options: options to be passed to the JSON library when decoding JSON
 
   ## Examples
 
@@ -33,6 +35,9 @@ defmodule Neuron.Config do
       :ok
 
       iex> Neuron.Config.set(:process, url: "http://example.com/graph")
+      :ok
+
+      iex> Neuron.Config.set(json_library: Jason)
       :ok
 
       iex> Neuron.Config.set(parse_options: [keys: :atoms])
@@ -43,16 +48,21 @@ defmodule Neuron.Config do
   def set(context, value)
 
   def set(:global, nil) do
-    [:neuron_url, :neuron_headers, :neuron_connection_opts, :neuron_parse_options]
+    [
+      :neuron_url,
+      :neuron_headers,
+      :neuron_connection_opts,
+      :neuron_json_library,
+      :neuron_parse_options
+    ]
     |> Enum.map(&Store.delete(:global, &1))
   end
 
   def set(context, url: value), do: Store.set(context, :neuron_url, value)
   def set(context, headers: value), do: Store.set(context, :neuron_headers, value)
   def set(context, connection_opts: value), do: Store.set(context, :neuron_connection_opts, value)
-
-  def set(context, parse_options: value),
-    do: Store.set(context, :neuron_parse_options, value)
+  def set(context, json_library: value), do: Store.set(context, :neuron_json_library, value)
+  def set(context, parse_options: value), do: Store.set(context, :neuron_parse_options, value)
 
   @doc """
   gets configuration value for Neuron
@@ -76,6 +86,7 @@ defmodule Neuron.Config do
   def get(:headers), do: get(:neuron_headers)
   def get(:url), do: get(:neuron_url)
   def get(:connection_opts), do: get(:neuron_connection_opts)
+  def get(:json_library), do: get(:neuron_json_library)
   def get(:parse_options), do: get(:neuron_parse_options)
 
   def get(key) do
