@@ -103,9 +103,14 @@ To run the tests
 mix test
 ```
 
-To run the lint
+## Style guide
+
+Code is formatted with `mix format` and `mix credo` should not show warnings.
+
+To format the code and run static code analysis with credo
 
 ```elixir
+mix format
 mix credo
 ```
 
