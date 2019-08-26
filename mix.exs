@@ -28,8 +28,8 @@ defmodule Neuron.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 1.0"},
-      {:poison, "~> 4.0"},
       {:jason, "~> 1.1", optional: true},
+      {:poison, "~> 4.0", only: :test},
       {:mock, "~> 0.3.3", only: :test},
       {:coverex, "~> 1.5", only: :test},
       {:credo, "~> 1.1", only: [:dev, :test]},
