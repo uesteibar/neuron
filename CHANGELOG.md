@@ -1,3 +1,13 @@
+<a name="3.0.1"></a>
+# [3.0.1](https://github.com/uesteibar/neuron/compare/v3.0.0...v3.0.1) (2019-08-26)
+
+
+### Bug Fixes
+
+* **deps:** Make poison a test dependency ([d75e10b](https://github.com/uesteibar/neuron/commit/d75e10b))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/uesteibar/neuron/compare/v2.0.0...v3.0.0) (2019-08-23)
 
