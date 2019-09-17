@@ -49,7 +49,7 @@ iex> Neuron.query("""
 
 # Response will be:
 
-{:ok, %Neuron.Response{body: %{"data" => {"films" => { "count": 123 }}}%, status_code: 200, headers: []}}
+{:ok, %Neuron.Response{body: %{"data" => %{"films" => %{ "count": 123 }}}, status_code: 200, headers: []}}
 
 # You can also run mutations
 
