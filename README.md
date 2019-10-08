@@ -9,6 +9,7 @@ A GraphQL client for Elixir.
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Running Locally](#running-locally)
 - [Contributing](#contributing)
 
@@ -81,6 +82,49 @@ iex> Neuron.query("""
 ```
 
 More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
+
+## Testing
+
+There is a testing framework provided. To use it set in your application config `config :neuron, testing_mode: true`.
+
+Then write tests using provided helpers:
+
+```elixir
+defmodule SomeApp.ResourcesTest do
+  use ExUnit.Case
+
+  use Neuron.Testing.UnitTest
+
+  alias Neuron.Testing.ValidationAssertion
+
+  describe "when provided with correct response" do
+    setup do
+      response = generate_example_response()
+
+      FakeNeuron.initialize_response({:ok, response})
+      :ok
+    end
+
+    neuron_called_test times: 1, name: "it must call neuron query" do
+      Module.call_query()
+    end
+
+    neuron_query_test "it must call neuron with provided headers" do
+      assertion.(%ValidationAssertion{
+        field: :keywords,
+        validation: fn keywords ->
+          Keyword.get(keywords, :headers) == ["header_1": "some_header"]
+        end,
+        message: "Wrong headers in the graphql query."
+      })
+
+      operation.(
+        Module.call_query()
+      )
+    end
+  end
+end
+```
 
 ## Running locally
 

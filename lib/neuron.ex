@@ -86,18 +86,25 @@ defmodule Neuron do
   )
   ```
   """
+  if Application.get_env(:neuron, :testing_mode) == true do
+    @spec query(query_string :: String.t(), variables :: Map.t(), options :: keyword()) ::
+            {:ok, Neuron.Response.t()} | {:error, Neuron.Response.t() | Neuron.JSONParseError.t()}
+    def query(query_string, variables \\ %{}, options \\ []) do
+      Neuron.Testing.FakeNeuron.query(query_string, variables, options)
+    end
+  else
+    @spec query(query_string :: String.t(), variables :: Map.t(), options :: keyword()) ::
+            {:ok, Neuron.Response.t()} | {:error, Neuron.Response.t() | Neuron.JSONParseError.t()}
+    def query(query_string, variables \\ %{}, options \\ []) do
+      json_library = json_library(options)
 
-  @spec query(query_string :: String.t(), variables :: Map.t(), options :: keyword()) ::
-          {:ok, Neuron.Response.t()} | {:error, Neuron.Response.t() | Neuron.JSONParseError.t()}
-  def query(query_string, variables \\ %{}, options \\ []) do
-    json_library = json_library(options)
-
-    query_string
-    |> Fragment.insert_into_query()
-    |> build_body()
-    |> insert_variables(variables)
-    |> json_library.encode!()
-    |> run(options)
+      query_string
+      |> Fragment.insert_into_query()
+      |> build_body()
+      |> insert_variables(variables)
+      |> json_library.encode!()
+      |> run(options)
+    end
   end
 
   @doc """
