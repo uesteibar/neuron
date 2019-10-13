@@ -54,7 +54,7 @@ defmodule Neuron.Fragment do
 
     missing_fragments = fragments_to_add |> Enum.filter(&is_atom/1) |> Enum.map(&Atom.to_string/1)
 
-    if Enum.any?(missing_fragments), do: raise("Fragments #{missing_fragments} not found")
+    if Enum.any?(missing_fragments), do: raise Neuron.MissingFragmentsError, missing_fragments: missing_fragments
 
     fragments_to_add
     |> Enum.map(&elem(&1, 1))
@@ -98,5 +98,16 @@ defmodule Neuron.Fragment do
       _ ->
         loaded
     end
+  end
+end
+
+defmodule Neuron.MissingFragmentsError do
+  defexception [:missing_fragments, message: "Missing fragments"]
+
+  @impl true
+  def message(exception) do
+    missing_fragments = Enum.join(exception.missing_fragments, ", ")
+
+    "Fragments #{missing_fragments} not found"
   end
 end
