@@ -8,7 +8,7 @@ defmodule Neuron.Response do
   Struct representation of a query response.
   """
 
-  @type t :: %Neuron.Response{body: Map.t(), status_code: Integer.t(), headers: keyword()}
+  @type t :: %Neuron.Response{body: map(), status_code: integer(), headers: keyword()}
 
   defstruct body: %{},
             status_code: nil,

@@ -5,7 +5,7 @@ defmodule Neuron.JSONParseError do
 
   alias Neuron.Response
 
-  @type t :: %Neuron.JSONParseError{error: Map.t(), response: Response.t()}
+  @type t :: %Neuron.JSONParseError{error: map(), response: Response.t()}
 
   defstruct response: %Response{},
             error: nil
