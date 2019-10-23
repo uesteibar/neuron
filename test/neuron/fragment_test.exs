@@ -63,8 +63,12 @@ defmodule Neuron.FragmentTest do
     setup [:clear_stored_fragments]
 
     test "query containing fragments error" do
-      assert_raise RuntimeError, fn ->
+      assert_raise Neuron.MissingFragmentsError, "Fragments Name not found", fn ->
         Neuron.query(@test_query_with_fragment)
+      end
+
+      assert_raise Neuron.MissingFragmentsError, "Fragments Name, MemberDetails not found", fn ->
+        Neuron.query(@test_query_with_recursive_fragment)
       end
     end
   end
