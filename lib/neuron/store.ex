@@ -16,7 +16,7 @@ defmodule Neuron.Store do
   @spec set(key :: atom(), value :: any()) :: :ok
   def set(key, value), do: set(:global, key, value)
 
-  @spec set(context :: :global | :process, ket :: atom(), value :: any()) :: :ok
+  @spec set(context :: :global | :process, key :: atom(), value :: any()) :: :ok
   def set(:global, key, value) do
     Application.put_env(:neuron, key, value)
   end
