@@ -17,6 +17,11 @@ defmodule Neuron.Mixfile do
       package: package(),
       deps: deps(),
       docs: docs(),
+      dialyzer: [
+        plt_add_deps: :transitive,
+        plt_add_apps: [:mix],
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+      ],
       source_url: @github
     ]
   end
