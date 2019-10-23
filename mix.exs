@@ -27,6 +27,7 @@ defmodule Neuron.Mixfile do
 
   defp deps do
     [
+      {:dialyxir, "~> 1.0.0-rc.4", only: :dev, runtime: false},
       {:httpoison, "~> 1.0"},
       {:jason, "~> 1.1", optional: true},
       {:poison, "~> 4.0", only: :test},

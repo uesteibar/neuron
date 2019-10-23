@@ -1,3 +1,7 @@
+# Unreleased
+
+* **typespecs:** Fix various type specs, specifically Neuron.query/2 can return a HTTPoison.Error.t().
+
 <a name="3.0.1"></a>
 # [3.0.1](https://github.com/uesteibar/neuron/compare/v3.0.0...v3.0.1) (2019-08-26)
 
