@@ -22,3 +22,7 @@ erl_crash.dump
 /.elixir_ls/
 
 *.coverdata
+
+# plts live in here for travis runs.
+/priv/plts/*.plt
+/priv/plts/*.plt.hash

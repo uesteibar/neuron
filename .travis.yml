@@ -5,6 +5,10 @@ elixir:
   - 1.8.2
   - 1.9.1
 
+cache:
+  directories:
+    - priv/plts
+
 jobs:
   include:
     - stage: lint
@@ -12,3 +16,6 @@ jobs:
       script:
         - mix format --check-formatted
         - mix credo
+    - stage: dialyzer
+      elixir: 1.9.1
+      script: MIX_ENV=dev travis_wait 20 mix dialyzer --plt
