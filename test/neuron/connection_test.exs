@@ -11,6 +11,12 @@ defmodule Neuron.ConnectionTest do
       %{url: "http://www.example.com/graph", query: %{}}
     end
 
+    test "missing url raises", %{query: query} do
+      assert_raise ArgumentError, "you need to supply an url", fn ->
+        Connection.post(nil, query, %{headers: [], connection_opts: []})
+      end
+    end
+
     test "with basic auth", %{url: url, query: query} do
       with_mock HTTPoison,
         post: fn _url, _query, _headers, _opts ->
