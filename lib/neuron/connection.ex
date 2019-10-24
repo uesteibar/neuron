@@ -1,7 +1,7 @@
 defmodule Neuron.Connection do
   @moduledoc false
 
-  def post(nil, _) do
+  def post(nil, _, _) do
     raise ArgumentError, message: "you need to supply an url"
   end
 
