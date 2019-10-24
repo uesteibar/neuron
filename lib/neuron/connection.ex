@@ -5,7 +5,7 @@ defmodule Neuron.Connection do
     raise ArgumentError, message: "you need to supply an url"
   end
 
-  def post(url, query, %{:headers => headers, :connection_opts => connection_opts}) do
+  def post(url, query, %{headers: headers, connection_opts: connection_opts}) do
     HTTPoison.post(
       url,
       query,
