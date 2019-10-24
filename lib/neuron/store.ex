@@ -27,7 +27,7 @@ defmodule Neuron.Store do
   end
 
   @doc """
-  returs neuron application/process environmental variables
+  returns neuron application/process environmental variables
 
   ## Examples
       iex> Neuron.Store.set(:my_key, "value")
