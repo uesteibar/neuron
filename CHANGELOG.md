@@ -1,3 +1,24 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/uesteibar/neuron/compare/v3.0.1...v4.0.0) (2019-10-25)
+
+
+### Bug Fixes
+
+* **connection:** fix function signature for Neuron.Connection.post ([82817e7](https://github.com/uesteibar/neuron/commit/82817e7))
+* **typespecs:** Fix typespecs for Neuron.query/3 and Neuron.Store.set/3 ([263fef4](https://github.com/uesteibar/neuron/commit/263fef4))
+
+
+### Features
+
+* **fragment:** raise `Neuron.MissingFragmentsError` for queries with missing fragments ([75ddf54](https://github.com/uesteibar/neuron/commit/75ddf54))
+
+
+### BREAKING CHANGES
+
+* **fragment:** Queries with missing fragments will now raise `Neuron.MissingFragmentsError` instead of a regular exception.
+
+
+
 # Unreleased
 
 * **typespecs:** Fix various type specs, specifically Neuron.query/2 can return a HTTPoison.Error.t().
