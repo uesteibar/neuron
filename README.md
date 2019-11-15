@@ -34,6 +34,28 @@ It is also possible to customize which JSON library that is used
 Neuron.Config.set(json_library: AnotherJSONLibrary)
 ```
 
+## Connection
+
+Neuron defaults to using HTTP(S) protocol with HTTPoison for Connecting to GraphQL endpoint. You can however customize that behaviour, by providing custom library, which should implement Neuron.Connection behaviour:
+
+```elixir
+defmodule MyConnection do
+  @behaviour Neuron.Connection
+
+  @impl Neuron.Connection
+  def call(body, options) do
+    IO.inspect("NEURON CALLED")
+    Neuron.Connection.Http.call(body, options)
+  end
+end
+```
+
+Then set it up in config:
+
+```elixir
+Neuron.Config.set(connection_library: MyConnection)
+```
+
 ## Usage
 
 ```elixir

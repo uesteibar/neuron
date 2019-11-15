@@ -1,7 +1,10 @@
-defmodule Neuron.ResponseTest do
+defmodule Neuron.Connection.HttpTest do
   use ExUnit.Case
 
+  import Mock
+
   alias Neuron.{
+    Connection,
     Response,
     JSONParseError
   }
@@ -23,6 +26,52 @@ defmodule Neuron.ResponseTest do
     }
   end
 
+  describe "build_headers/0" do
+    setup do
+      Neuron.Config.set(nil)
+      %{url: "http://www.example.com/graph", query: %{}}
+    end
+
+    test "missing url raises", %{query: query} do
+      assert_raise ArgumentError, "you need to supply an url", fn ->
+        Connection.Http.post(query, url: nil, headers: [], connection_opts: [])
+      end
+    end
+
+    test "with basic auth", %{url: url, query: query} do
+      with_mock HTTPoison,
+        post: fn _url, _query, _headers, _opts ->
+          {:ok, %HTTPoison.Response{}}
+        end do
+        headers = [hackney: [basic_auth: [user: "password"]]]
+        Connection.Http.post(query, url: url, headers: headers, connection_opts: [])
+
+        assert called(
+                 HTTPoison.post(
+                   url,
+                   query,
+                   Keyword.put(headers, :"Content-Type", "application/json"),
+                   []
+                 )
+               )
+      end
+    end
+
+    test "with custom connection options", %{url: url, query: query} do
+      with_mock HTTPoison,
+        post: fn _url, _query, _headers, _opts ->
+          {:ok, %HTTPoison.Response{}}
+        end do
+        connection_opts = [timeout: 50_000]
+        Connection.Http.post(query, url: url, headers: [], connection_opts: connection_opts)
+
+        assert called(
+                 HTTPoison.post(url, query, ["Content-Type": "application/json"], timeout: 50_000)
+               )
+      end
+    end
+  end
+
   describe "when successful response" do
     setup do
       %{
@@ -33,7 +82,7 @@ defmodule Neuron.ResponseTest do
     for json_library <- @json_libraries do
       test "returns the parsed Response struct using #{json_library}", %{response: response} do
         json_library = unquote(json_library)
-        result = Response.handle({:ok, response}, json_library, [])
+        result = Connection.Http.handle_response({:ok, response}, json_library: json_library)
 
         expected_result = %Response{
           body: %{"data" => %{"users" => []}},
@@ -53,7 +102,12 @@ defmodule Neuron.ResponseTest do
              response: response
            } do
         json_library = unquote(json_library)
-        result = Response.handle({:ok, response}, json_library, keys: :atoms)
+
+        result =
+          Connection.Http.handle_response({:ok, response},
+            json_library: json_library,
+            parse_options: [keys: :atoms]
+          )
 
         expected_result = %Response{
           body: %{:data => %{:users => []}},
@@ -78,7 +132,7 @@ defmodule Neuron.ResponseTest do
         response: response
       } do
         json_library = unquote(json_library)
-        result = Response.handle({:ok, response}, json_library, [])
+        result = Connection.Http.handle_response({:ok, response}, json_library: json_library)
 
         expected_result = %Response{
           body: %{"data" => nil, "errors" => "stuff"},
@@ -107,7 +161,7 @@ defmodule Neuron.ResponseTest do
         response: response
       } do
         json_library = unquote(json_library)
-        result = Response.handle({:ok, response}, json_library, [])
+        result = Connection.Http.handle_response({:ok, response}, json_library: json_library)
 
         expected_result = %Response{
           body: %{
@@ -131,7 +185,9 @@ defmodule Neuron.ResponseTest do
     for json_library <- @json_libraries do
       test "returns the error using #{json_library}" do
         json_library = unquote(json_library)
-        result = Response.handle({:error, "error message"}, json_library, [])
+
+        result =
+          Connection.Http.handle_response({:error, "error message"}, json_library: json_library)
 
         assert result == {:error, "error message"}
       end
@@ -145,7 +201,8 @@ defmodule Neuron.ResponseTest do
         body = "<html><body>This is not the GraphQL URL</body></html>"
         raw_response = build_response(200, body)
 
-        assert {:error, %JSONParseError{}} = Response.handle({:ok, raw_response}, json_library)
+        assert {:error, %JSONParseError{}} =
+                 Connection.Http.handle_response({:ok, raw_response}, json_library: json_library)
       end
     end
 
@@ -156,7 +213,7 @@ defmodule Neuron.ResponseTest do
         raw_response = build_response(200, body)
 
         assert {_, %{response: {:ok, %Response{} = response}}} =
-                 Response.handle({:ok, raw_response}, json_library)
+                 Connection.Http.handle_response({:ok, raw_response}, json_library: json_library)
 
         assert response.body == raw_response.body
         assert response.headers == raw_response.headers

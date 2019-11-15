@@ -1,16 +1,7 @@
 defmodule Neuron.Connection do
-  @moduledoc false
+  @moduledoc """
+  Neuron.Connection is a behaviour for defining pluggable connectors for Neuron library.
+  """
 
-  def post(nil, _, _) do
-    raise ArgumentError, message: "you need to supply an url"
-  end
-
-  def post(url, query, %{headers: headers, connection_opts: connection_opts}) do
-    HTTPoison.post(
-      url,
-      query,
-      headers,
-      connection_opts
-    )
-  end
+  @callback call(String.t(), Keyword.t()) :: {:ok, term} | {:error, term}
 end
