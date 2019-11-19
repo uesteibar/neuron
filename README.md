@@ -53,7 +53,7 @@ end
 Then set it up in config:
 
 ```elixir
-Neuron.Config.set(connection_library: MyConnection)
+Neuron.Config.set(connection_module: MyConnection)
 ```
 
 ## Usage

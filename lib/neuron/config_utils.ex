@@ -21,18 +21,18 @@ defmodule Neuron.ConfigUtils do
   end
 
   @doc """
-  Returns the Connection library that is configured in Neuron. Default is Neuron.Connection.Http.
+  Returns the Connection module that is configured in Neuron. Default is Neuron.Connection.Http.
   """
-  @spec connection_library :: module()
-  def connection_library() do
-    Config.get(:connection_library) || Neuron.Connection.Http
+  @spec connection_module :: module()
+  def connection_module() do
+    Config.get(:connection_module) || Neuron.Connection.Http
   end
 
   @doc """
   Returns the Connection library that is configured in Neuron, or overriden in options. Default is Neuron.Connection.Http.
   """
-  def connection_library(options) do
-    Keyword.get(options, :connection_library, connection_library())
+  def connection_module(options) do
+    Keyword.get(options, :connection_module, connection_module())
   end
 
   @doc """

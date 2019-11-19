@@ -107,8 +107,8 @@ defmodule Neuron do
   end
 
   defp run_query(body, options) do
-    connnection_library = ConfigUtils.connection_library(options)
-    connnection_library.call(body, options)
+    connection_module = ConfigUtils.connection_module(options)
+    connection_module.call(body, options)
   end
 
   defp build_body(query_string), do: %{query: query_string}
