@@ -5,9 +5,6 @@ defmodule Neuron.Connection.Http do
   alias Neuron.{Config, ConfigUtils, JSONParseError, Response}
 
   @impl Neuron.Connection
-  @spec call(any, keyword) ::
-          {:error, term}
-          | {:ok, term}
   def call(query, options),
     do:
       query
