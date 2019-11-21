@@ -1,3 +1,13 @@
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/uesteibar/neuron/compare/v4.0.0...v4.1.0) (2019-11-21)
+
+
+### Features
+
+* **connection:** Allow to inject custom connection module ([f22287e](https://github.com/uesteibar/neuron/commit/f22287e))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/uesteibar/neuron/compare/v3.0.1...v4.0.0) (2019-10-25)
 
