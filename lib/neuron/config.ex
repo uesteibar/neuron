@@ -25,7 +25,8 @@ defmodule Neuron.Config do
 
   - url: graphql endpoint url
   - headers: headers to be sent in the request
-  - connection_opts: additional options to be passed to HTTPoison
+  - connection_opts: additional options to be passed to connection library
+  - connection_module: module to be used for connecting to GQL API. Default is Neuron.Connection.Http
   - json_library: JSON library. Default is Jason.
   - parse_options: options to be passed to the JSON library when decoding JSON
 
@@ -52,6 +53,7 @@ defmodule Neuron.Config do
       :neuron_url,
       :neuron_headers,
       :neuron_connection_opts,
+      :neuron_connection_module,
       :neuron_json_library,
       :neuron_parse_options
     ]
@@ -61,6 +63,10 @@ defmodule Neuron.Config do
   def set(context, url: value), do: Store.set(context, :neuron_url, value)
   def set(context, headers: value), do: Store.set(context, :neuron_headers, value)
   def set(context, connection_opts: value), do: Store.set(context, :neuron_connection_opts, value)
+
+  def set(context, connection_module: value),
+    do: Store.set(context, :neuron_connection_module, value)
+
   def set(context, json_library: value), do: Store.set(context, :neuron_json_library, value)
   def set(context, parse_options: value), do: Store.set(context, :neuron_parse_options, value)
 
@@ -86,6 +92,7 @@ defmodule Neuron.Config do
   def get(:headers), do: get(:neuron_headers)
   def get(:url), do: get(:neuron_url)
   def get(:connection_opts), do: get(:neuron_connection_opts)
+  def get(:connection_module), do: get(:neuron_connection_module)
   def get(:json_library), do: get(:neuron_json_library)
   def get(:parse_options), do: get(:neuron_parse_options)
 
