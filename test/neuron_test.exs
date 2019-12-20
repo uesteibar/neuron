@@ -54,7 +54,9 @@ defmodule NeuronTest do
           call: fn _body, _options ->
             {:ok, %{body: ~s/{"data": {"users": []}}/, status_code: 200, headers: []}}
           end do
-          Neuron.query("{ users { name } }", %{},
+          Neuron.query(
+            "{ users { name } }",
+            %{},
             url: url,
             headers: headers,
             connection_opts: connection_opts,
