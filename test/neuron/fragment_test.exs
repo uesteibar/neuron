@@ -52,6 +52,17 @@ defmodule Neuron.FragmentTest do
     }
   """
 
+  @test_query_with_repeated_fragments """
+    query users {
+      user(id: 123) {
+        ...Name
+      }
+      user(id: 456) {
+        ...Name
+      }
+    }
+  """
+
   @test_mutation_with_quoted_fragment """
     mutation user(email: "...Name@gmail.com") {
       firstName
@@ -122,6 +133,16 @@ defmodule Neuron.FragmentTest do
       resolved = Fragment.insert_into_query(@test_query_with_recursive_fragment)
 
       assert Regex.scan(~r/fragment\s+Name/, resolved) |> length() == 1
+    end
+  end
+
+  describe "when query contains repeated fragments in one body" do
+    setup [:clear_stored_fragments, :register_name_fragment]
+
+    test "fragments are not duplicated during the execution of find_in_query/1" do
+      resolved = Fragment.insert_into_query(@test_query_with_repeated_fragments)
+
+      assert Regex.scan(~r/fragment/, resolved) |> length() == 1
     end
   end
 
