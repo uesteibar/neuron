@@ -104,7 +104,8 @@ defmodule Neuron.Connection.HttpTest do
         json_library = unquote(json_library)
 
         result =
-          Connection.Http.handle_response({:ok, response},
+          Connection.Http.handle_response(
+            {:ok, response},
             json_library: json_library,
             parse_options: [keys: :atoms]
           )

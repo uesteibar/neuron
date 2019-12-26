@@ -67,6 +67,7 @@ defmodule Neuron.Fragment do
     Regex.scan(~r/(?<=\.\.\.)\w+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/, query_string)
     |> List.flatten()
     |> Enum.map(&String.to_atom/1)
+    |> Enum.uniq()
   end
 
   defp construct_fragment_string(fragment_string) do
