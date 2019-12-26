@@ -1,3 +1,13 @@
+<a name="4.1.1"></a>
+# [4.1.1](https://github.com/uesteibar/neuron/compare/v4.1.0...v4.1.1) (2019-12-26)
+
+
+### Bug Fixes
+
+* **fragments:** remove duplicate fragments when inserting them into the query ([d3a5c3d](https://github.com/uesteibar/neuron/commit/d3a5c3d)), closes [#56](https://github.com/uesteibar/neuron/issues/56)
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/uesteibar/neuron/compare/v4.0.0...v4.1.0) (2019-11-21)
 
