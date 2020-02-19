@@ -36,7 +36,7 @@ defmodule Neuron.Connection.Http do
 
   defp headers(options), do: Keyword.get(options, :headers, Config.get(:headers) || [])
 
-  defp handle(response, json_library, parse_options \\ [])
+  defp handle(response, json_library, parse_options)
 
   defp handle({:ok, response}, json_library, parse_options) do
     case json_library.decode(response.body, parse_options) do
