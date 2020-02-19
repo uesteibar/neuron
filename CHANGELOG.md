@@ -1,3 +1,13 @@
+<a name="4.1.2"></a>
+# [4.1.2](https://github.com/uesteibar/neuron/compare/v4.1.1...v) (2020-02-19)
+
+
+### Bug Fixes
+
+* **warning:**  compile time warning (default arguments in handle/3 are never used) ([75c151c](https://github.com/uesteibar/neuron/commit/75c151c))
+
+
+
 <a name="4.1.1"></a>
 # [4.1.1](https://github.com/uesteibar/neuron/compare/v4.1.0...v4.1.1) (2019-12-26)
 
