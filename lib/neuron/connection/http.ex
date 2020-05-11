@@ -40,7 +40,7 @@ defmodule Neuron.Connection.Http do
 
   defp handle({:ok, response}, json_library, parse_options) do
     case json_library.decode(response.body, parse_options) do
-      {:ok, body} -> build_response(%{response | body: body})
+      {:ok, body} -> build_response_tuple(%{response | body: body})
       {:error, error} -> handle_unparsable(response, error)
       {:error, error, _} -> handle_unparsable(response, error)
     end
@@ -48,25 +48,25 @@ defmodule Neuron.Connection.Http do
 
   defp handle({:error, _} = response, _, _), do: response
 
-  defp build_response(%{status_code: 200} = response) do
-    {
-      :ok,
-      %Response{
-        status_code: response.status_code,
-        body: response.body,
-        headers: response.headers
-      }
+  defp build_response(response) do
+    %Response{
+      status_code: response.status_code,
+      body: response.body,
+      headers: response.headers
     }
   end
 
-  defp build_response(response) do
+  defp build_response_tuple(%{status_code: 200} = response) do
+    {
+      :ok,
+      build_response(response)
+    }
+  end
+
+  defp build_response_tuple(response) do
     {
       :error,
-      %Response{
-        status_code: response.status_code,
-        body: response.body,
-        headers: response.headers
-      }
+      build_response(response)
     }
   end
 

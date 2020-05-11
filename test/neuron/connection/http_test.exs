@@ -202,8 +202,19 @@ defmodule Neuron.Connection.HttpTest do
         body = "<html><body>This is not the GraphQL URL</body></html>"
         raw_response = build_response(200, body)
 
-        assert {:error, %JSONParseError{}} =
+        assert {:error, parse_error} =
                  Connection.Http.handle_response({:ok, raw_response}, json_library: json_library)
+
+        assert is_map(parse_error)
+        assert :erlang.is_map_key(:__struct__, parse_error)
+        assert :erlang.map_get(:__struct__, parse_error) == JSONParseError
+
+        assert %JSONParseError{error: error, response: response} = parse_error
+
+        assert is_map(error)
+        assert is_map(response)
+        assert :erlang.is_map_key(:__struct__, response)
+        assert :erlang.map_get(:__struct__, response) == Response
       end
     end
 
@@ -213,7 +224,7 @@ defmodule Neuron.Connection.HttpTest do
         body = "<html><body>This is not the GraphQL URL</body></html>"
         raw_response = build_response(200, body)
 
-        assert {_, %{response: {:ok, %Response{} = response}}} =
+        assert {_, %{response: %Response{} = response}} =
                  Connection.Http.handle_response({:ok, raw_response}, json_library: json_library)
 
         assert response.body == raw_response.body
