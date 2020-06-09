@@ -206,15 +206,15 @@ defmodule Neuron.Connection.HttpTest do
                  Connection.Http.handle_response({:ok, raw_response}, json_library: json_library)
 
         assert is_map(parse_error)
-        assert :erlang.is_map_key(:__struct__, parse_error)
-        assert :erlang.map_get(:__struct__, parse_error) == JSONParseError
+        assert :maps.is_key(:__struct__, parse_error)
+        assert :maps.get(:__struct__, parse_error) == JSONParseError
 
         assert %JSONParseError{error: error, response: response} = parse_error
 
         assert is_map(error)
         assert is_map(response)
-        assert :erlang.is_map_key(:__struct__, response)
-        assert :erlang.map_get(:__struct__, response) == Response
+        assert :maps.is_key(:__struct__, response)
+        assert :maps.get(:__struct__, response) == Response
       end
     end
 
