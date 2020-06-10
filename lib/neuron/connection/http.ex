@@ -48,14 +48,6 @@ defmodule Neuron.Connection.Http do
 
   defp handle({:error, _} = response, _, _), do: response
 
-  defp build_response(response) do
-    %Response{
-      status_code: response.status_code,
-      body: response.body,
-      headers: response.headers
-    }
-  end
-
   defp build_response_tuple(%{status_code: 200} = response) do
     {
       :ok,
@@ -67,6 +59,14 @@ defmodule Neuron.Connection.Http do
     {
       :error,
       build_response(response)
+    }
+  end
+
+  defp build_response(response) do
+    %Response{
+      status_code: response.status_code,
+      body: response.body,
+      headers: response.headers
     }
   end
 
