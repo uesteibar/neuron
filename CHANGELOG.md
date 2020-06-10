@@ -1,5 +1,19 @@
+# [5.0.0](https://github.com/uesteibar/neuron/compare/v4.1.2...v5.0.0) (2020-06-10)
+
+
+### Bug Fixes
+
+* **neuron.connection.http:** fix error case so return value matches typespec ([#60](https://github.com/uesteibar/neuron/issues/60)) ([b96d871](https://github.com/uesteibar/neuron/commit/b96d87189bb2e8194e905d0cbc7e62199d2594c3)), closes [#59](https://github.com/uesteibar/neuron/issues/59)
+
+
+### BREAKING CHANGES
+
+* **neuron.connection.http:** If your code expects the `response` field of `JSONParseError` to be a tuple, it will break.
+
+
+
 <a name="4.1.2"></a>
-# [4.1.2](https://github.com/uesteibar/neuron/compare/v4.1.1...v) (2020-02-19)
+# [4.1.2](https://github.com/uesteibar/neuron/compare/v4.1.1...v4.1.2) (2020-02-19)
 
 
 ### Bug Fixes
