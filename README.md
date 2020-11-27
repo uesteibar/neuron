@@ -102,6 +102,26 @@ iex> Neuron.query("""
     )
 ```
 
+
+### Overriding HTTP Timeout
+`HTTPoison` default timeout is 5000ms, in case we need to handle longer timeout, using default `Neuron.Connection` module, we could set `connection_opts` which will be passed to `HTTPoison`. So to override timeout to 15000ms, we could do:
+
+```elixir
+iex> Neuron.Config.set(url: "https://example.com/graph", connection_opts: [recv_timeout: 15_000])
+
+iex> Neuron.query("""
+      {
+        films {
+          count
+        }
+      }
+    """)
+```
+
+We can also set the timeout for a single request by passing the `connection_opts` to `Neuron.query/3` instead:
+
+```elixir
+iex> Neuron.query("...", %{}, connection_opts: [recv_timeout: 15_000])
 More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
 
 ## Running locally
