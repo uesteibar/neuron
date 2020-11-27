@@ -118,6 +118,10 @@ iex> Neuron.query("""
     """)
 ```
 
+We can also set the timeout for a single request by passing the `connection_opts` to `Neuron.query/3` instead:
+
+```elixir
+iex> Neuron.query("...", %{}, connection_opts: [recv_timeout: 15_000])
 More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
 
 ## Running locally
