@@ -123,6 +123,51 @@ We can also set the timeout for a single request by passing the `connection_opts
 ```elixir
 iex> Neuron.query("...", %{}, connection_opts: [recv_timeout: 15_000])
 More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
+```
+
+### Testing
+
+You can mock directly with Mox without a wrapping module.
+
+```elixir
+# config/config.exs
+
+config :my_app, neuron_adapter: Neuron
+
+# config/test.exs
+
+config :my_app, neuron_adapter: NeuronMock
+
+# lib
+
+@neuron_adapter Application.get_env(:my_app, :neuron_adapter)
+@graphql """
+  {
+    films {
+      count
+    }
+  }
+"""
+def films_count, do: @neuron_adapter.query(@graphql)
+
+# in the test
+
+Mox.defmock(NeuronMock, for: Neuron.Behaviour)
+
+query =
+  """
+    {
+      films {
+        count
+      }
+    }
+  """
+expect(NeuronMock, :query, fn ^query ->
+  {:ok, %Neuron.Response{body: %{"data" => %{"films" => %{ "count": 123 }}}, status_code: 200, headers: []}}
+end)
+
+assert 123 == MyApp.films_count()
+```
 
 ## Running locally
 

@@ -87,9 +87,9 @@ defmodule Neuron do
 
   alias Neuron.{ConfigUtils, Fragment}
 
-  @spec query(query_string :: String.t(), variables :: map(), options :: keyword()) ::
-          {:ok, Neuron.Response.t()}
-          | {:error, Neuron.Response.t() | Neuron.JSONParseError.t() | HTTPoison.Error.t()}
+  @behaviour Neuron.Behaviour
+
+  @impl Neuron.Behaviour
   def query(query_string, variables \\ %{}, options \\ []) do
     json_library = ConfigUtils.json_library(options)
 
