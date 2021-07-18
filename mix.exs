@@ -21,8 +21,7 @@ defmodule Neuron.Mixfile do
         plt_add_deps: :transitive,
         plt_add_apps: [:mix],
         plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
-      ],
-      source_url: @github
+      ]
     ]
   end
 
@@ -39,7 +38,7 @@ defmodule Neuron.Mixfile do
       {:mock, "~> 0.3.3", only: :test},
       {:coverex, "~> 1.5", only: :test},
       {:credo, "~> 1.1", only: [:dev, :test]},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
@@ -59,10 +58,17 @@ defmodule Neuron.Mixfile do
 
   defp docs do
     [
+      extras: [
+        "CHANGELOG.md": [],
+        "LICENSE.md": [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
+      main: "readme",
+      assets: "assets",
+      source_url: @github,
       source_ref: "v#{@version}",
-      main: "Neuron",
-      logo: "logo/logo.png",
-      extras: ["README.md"]
+      logo: "assets/logo.png",
+      formatters: ["html"]
     ]
   end
 

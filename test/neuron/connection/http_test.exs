@@ -95,9 +95,7 @@ defmodule Neuron.Connection.HttpTest do
     end
 
     for json_library <- @json_libraries do
-      test "returns the parsed Response struct with atom keys in the body map using #{
-             json_library
-           }",
+      test "returns the parsed Response struct with atom keys in the body map using #{json_library}",
            %{
              response: response
            } do

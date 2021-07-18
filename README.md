@@ -1,4 +1,4 @@
-<p align="center"><img src="logo/horizontal.png" alt="neuron" height="150px"></p>
+<p align="center"><img src="assets/horizontal.png" alt="neuron" height="150px"></p>
 
 [![Build Status](https://travis-ci.org/uesteibar/neuron.svg?branch=master)](https://travis-ci.org/uesteibar/neuron)
 [![Hex Version](https://img.shields.io/hexpm/v/neuron.svg)](https://hex.pm/packages/neuron)
@@ -16,19 +16,21 @@ A GraphQL client for Elixir.
 
 ```elixir
 def deps do
-  [{:neuron, "~> 5.0.0"}]
+  [
+    {:neuron, "~> 5.0.0"}
+  ]
 end
 ```
 
 ## JSON library
 
-Neuron defaults to using Jason for JSON encoding and decoding. To use Jason, add it to your deps
+Neuron defaults to using Jason for JSON encoding and decoding. To use Jason, add it to your deps:
 
 ```elixir
 {:jason, "~> 1.1"}
 ```
 
-It is also possible to customize which JSON library that is used
+It is also possible to customize which JSON library that is used:
 
 ```elixir
 Neuron.Config.set(json_library: AnotherJSONLibrary)
@@ -68,13 +70,17 @@ iex> Neuron.query("""
         }
       }
     """)
+```
 
-# Response will be:
+Response will be:
 
+```elixir
 {:ok, %Neuron.Response{body: %{"data" => %{"films" => %{ "count": 123 }}}, status_code: 200, headers: []}}
+```
 
-# You can also run mutations
+You can also run mutations:
 
+```elixir
 iex> Neuron.query("""
       mutation createUser($name: String!) {
         createUser(name: $name) {
@@ -85,9 +91,11 @@ iex> Neuron.query("""
     """,
     %{name: "uesteibar"}
     )
+```
 
-# You can also set url and headers as shown below
+You can also set url and headers as shown below:
 
+```elixir
 iex> Neuron.query("""
       mutation createUser($name: String!) {
         createUser(name: $name) {
@@ -101,7 +109,6 @@ iex> Neuron.query("""
     headers: [authorization: "Bearer <token>"]
     )
 ```
-
 
 ### Overriding HTTP Timeout
 `HTTPoison` default timeout is 5000ms, in case we need to handle longer timeout, using default `Neuron.Connection` module, we could set `connection_opts` which will be passed to `HTTPoison`. So to override timeout to 15000ms, we could do:
@@ -122,24 +129,26 @@ We can also set the timeout for a single request by passing the `connection_opts
 
 ```elixir
 iex> Neuron.query("...", %{}, connection_opts: [recv_timeout: 15_000])
+```
+
 More extensive documentation can be found at [https://hexdocs.pm/neuron](https://hexdocs.pm/neuron).
 
 ## Running locally
 
-Clone the repository
+Clone the repository:
 
 ```bash
 git clone git@github.com:uesteibar/neuron.git
 ```
 
-Install dependencies
+Install dependencies:
 
 ```bash
 cd neuron
 mix deps.get
 ```
 
-To run the tests
+To run the tests:
 
 ```bash
 mix test
@@ -165,22 +174,28 @@ For that reason every contribution should have a title and body that follows the
 
 To make this process easier, you can do the following:
 
-Install `commitizen` and `cz-conventional-changelog` globally
+Install `commitizen` and `cz-conventional-changelog` globally:
 
 ```bash
 npm i -g commitizen cz-conventional-changelog
 ```
 
-Save `cz-conventional-changelog` as default
+Save `cz-conventional-changelog` as default:
 
 ```bash
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
-Instead of `git commit`, you can now run
+Instead of `git commit`, you can now run:
 
 ```
 git cz
 ```
 
 and follow the instructions to generate the commit message.
+
+## Copyright and License
+
+Copyright (c) 2017 Unai Esteibar
+
+This software is released under the [Internet Systems Consortium License](./LICENSE.md).

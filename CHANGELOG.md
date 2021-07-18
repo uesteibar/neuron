@@ -1,4 +1,6 @@
-# [5.0.0](https://github.com/uesteibar/neuron/compare/v4.1.2...v5.0.0) (2020-06-10)
+# Changelog
+
+## [5.0.0](https://github.com/uesteibar/neuron/compare/v4.1.2...v5.0.0) (2020-06-10)
 
 
 ### Bug Fixes
@@ -13,7 +15,7 @@
 
 
 <a name="4.1.2"></a>
-# [4.1.2](https://github.com/uesteibar/neuron/compare/v4.1.1...v4.1.2) (2020-02-19)
+## [4.1.2](https://github.com/uesteibar/neuron/compare/v4.1.1...v4.1.2) (2020-02-19)
 
 
 ### Bug Fixes
@@ -23,7 +25,7 @@
 
 
 <a name="4.1.1"></a>
-# [4.1.1](https://github.com/uesteibar/neuron/compare/v4.1.0...v4.1.1) (2019-12-26)
+## [4.1.1](https://github.com/uesteibar/neuron/compare/v4.1.0...v4.1.1) (2019-12-26)
 
 
 ### Bug Fixes
@@ -33,7 +35,7 @@
 
 
 <a name="4.1.0"></a>
-# [4.1.0](https://github.com/uesteibar/neuron/compare/v4.0.0...v4.1.0) (2019-11-21)
+## [4.1.0](https://github.com/uesteibar/neuron/compare/v4.0.0...v4.1.0) (2019-11-21)
 
 
 ### Features
@@ -43,7 +45,7 @@
 
 
 <a name="4.0.0"></a>
-# [4.0.0](https://github.com/uesteibar/neuron/compare/v3.0.1...v4.0.0) (2019-10-25)
+## [4.0.0](https://github.com/uesteibar/neuron/compare/v3.0.1...v4.0.0) (2019-10-25)
 
 
 ### Bug Fixes
@@ -68,7 +70,7 @@
 * **typespecs:** Fix various type specs, specifically Neuron.query/2 can return a HTTPoison.Error.t().
 
 <a name="3.0.1"></a>
-# [3.0.1](https://github.com/uesteibar/neuron/compare/v3.0.0...v3.0.1) (2019-08-26)
+## [3.0.1](https://github.com/uesteibar/neuron/compare/v3.0.0...v3.0.1) (2019-08-26)
 
 
 ### Bug Fixes
@@ -78,7 +80,7 @@
 
 
 <a name="3.0.0"></a>
-# [3.0.0](https://github.com/uesteibar/neuron/compare/v2.0.0...v3.0.0) (2019-08-23)
+## [3.0.0](https://github.com/uesteibar/neuron/compare/v2.0.0...v3.0.0) (2019-08-23)
 
 
 ### Features
@@ -96,7 +98,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="2.0.0"></a>
-# [2.0.0](https://github.com/uesteibar/neuron/compare/v1.2.0...v2.0.0) (2019-06-26)
+## [2.0.0](https://github.com/uesteibar/neuron/compare/v1.2.0...v2.0.0) (2019-06-26)
 
 
 ### chore
@@ -111,7 +113,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="1.2.0"></a>
-# [1.2.0](https://github.com/uesteibar/neuron/compare/v1.1.1...v1.2.0) (2019-05-30)
+## [1.2.0](https://github.com/uesteibar/neuron/compare/v1.1.1...v1.2.0) (2019-05-30)
 
 
 ### Features
@@ -121,7 +123,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="1.1.1"></a>
-# [1.1.1](https://github.com/uesteibar/neuron/compare/v1.1.0...v1.1.1) (2019-03-14)
+## [1.1.1](https://github.com/uesteibar/neuron/compare/v1.1.0...v1.1.1) (2019-03-14)
 
 
 ### Bug Fixes
@@ -131,7 +133,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="1.1.0"></a>
-# [1.1.0](https://github.com/uesteibar/neuron/compare/v1.0.0...v1.1.0) (2018-12-25)
+## [1.1.0](https://github.com/uesteibar/neuron/compare/v1.0.0...v1.1.0) (2018-12-25)
 
 
 ### Features
@@ -143,7 +145,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/uesteibar/neuron/compare/v0.9.1...v1.0.0) (2018-10-15)
+## [1.0.0](https://github.com/uesteibar/neuron/compare/v0.9.1...v1.0.0) (2018-10-15)
 
 
 ### Features
@@ -159,7 +161,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="0.9.1"></a>
-# [0.9.1](https://github.com/uesteibar/neuron/compare/v0.9.0...v0.9.1) (2018-09-21)
+## [0.9.1](https://github.com/uesteibar/neuron/compare/v0.9.0...v0.9.1) (2018-09-21)
 
 
 ### Bug Fixes
@@ -179,7 +181,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="0.8.0"></a>
-# [0.8.0](https://github.com/uesteibar/neuron/compare/v0.7.0...v0.8.0) (2018-08-22)
+## [0.8.0](https://github.com/uesteibar/neuron/compare/v0.7.0...v0.8.0) (2018-08-22)
 
 
 ### Features
@@ -189,7 +191,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="0.7.0"></a>
-# [0.7.0](https://github.com/uesteibar/neuron/compare/v0.6.0...v0.7.0) (2018-07-01)
+## [0.7.0](https://github.com/uesteibar/neuron/compare/v0.6.0...v0.7.0) (2018-07-01)
 
 
 ### Features
@@ -199,7 +201,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="0.6.0"></a>
-# [0.6.0](https://github.com/uesteibar/neuron/compare/v0.5.1...v0.6.0) (2018-05-15)
+## [0.6.0](https://github.com/uesteibar/neuron/compare/v0.5.1...v0.6.0) (2018-05-15)
 
 
 ### Features
@@ -209,7 +211,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="0.5.1"></a>
-# [0.5.1](https://github.com/uesteibar/neuron/compare/v0.5.0...v0.5.1) (2018-03-13)
+## [0.5.1](https://github.com/uesteibar/neuron/compare/v0.5.0...v0.5.1) (2018-03-13)
 
 ### Docs
 
@@ -218,7 +220,7 @@ use it by running `Neuron.Config.set(json_library: AnotherJSONLibrary)`.
 
 
 <a name="0.5.0"></a>
-# [0.5.0](https://github.com/uesteibar/neuron/compare/v0.4.0...v0.5.0) (2018-03-13)
+## [0.5.0](https://github.com/uesteibar/neuron/compare/v0.4.0...v0.5.0) (2018-03-13)
 
 ### BREAKING CHANGE
 
@@ -229,7 +231,7 @@ Now the value of response.body will be %{ data: ..., errors: ... } instead of %{
 
 
 <a name="0.4.0"></a>
-# [0.4.0](https://github.com/uesteibar/neuron/compare/v0.3.1...v0.4.0) (2018-02-27)
+## [0.4.0](https://github.com/uesteibar/neuron/compare/v0.3.1...v0.4.0) (2018-02-27)
 
 
 ### Features
@@ -239,7 +241,7 @@ Now the value of response.body will be %{ data: ..., errors: ... } instead of %{
 
 
 <a name="0.3.1"></a>
-# [0.3.1](https://github.com/uesteibar/neuron/compare/v0.3.0...v0.3.1) (2017-09-05)
+## [0.3.1](https://github.com/uesteibar/neuron/compare/v0.3.0...v0.3.1) (2017-09-05)
 
 
 ### Bug Fixes
@@ -249,7 +251,7 @@ Now the value of response.body will be %{ data: ..., errors: ... } instead of %{
 
 
 <a name="0.3.0"></a>
-# [0.3.0](https://github.com/uesteibar/neuron/compare/v0.2.0...v0.3.0) (2017-09-05)
+## [0.3.0](https://github.com/uesteibar/neuron/compare/v0.2.0...v0.3.0) (2017-09-05)
 
 
 ### Features
@@ -264,7 +266,7 @@ Now the value of response.body will be %{ data: ..., errors: ... } instead of %{
 
 
 <a name="0.2.0"></a>
-# [0.2.0](https://github.com/uesteibar/neuron/compare/v0.1.1...v0.2.0) (2017-05-28)
+## [0.2.0](https://github.com/uesteibar/neuron/compare/v0.1.1...v0.2.0) (2017-05-28)
 
 
 ### Features
@@ -284,7 +286,7 @@ Now the value of response.body will be %{ data: ..., errors: ... } instead of %{
 
 
 <a name="0.1.0"></a>
-# [0.1.0](https://github.com/uesteibar/neuron/compare/3d46dc7...v0.1.0) (2017-05-28)
+## [0.1.0](https://github.com/uesteibar/neuron/compare/3d46dc7...v0.1.0) (2017-05-28)
 
 
 ### Features
