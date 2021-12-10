@@ -24,12 +24,12 @@ defmodule Neuron.Subscription do
     {:ok, opts}
   end
 
-  def supervisor(subscriber: subscriber) do
+  def supervisor(subscriber: subscriber, url: url) do
 
     {AbsintheWebSocket.Supervisor,
      [
        subscriber: subscriber,
-       url: subscriber.url,
+       url: url,
        token: nil,
        base_name: subscriber,
        async: true
