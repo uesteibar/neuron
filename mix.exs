@@ -34,11 +34,12 @@ defmodule Neuron.Mixfile do
       {:dialyxir, "~> 1.0.0-rc.4", only: :dev, runtime: false},
       {:httpoison, "~> 1.0"},
       {:jason, "~> 1.1", optional: true},
-      {:poison, "~> 4.0", only: :test},
+      {:poison, "~> 4.0", only: :test, override: true},
       {:mock, "~> 0.3.3", only: :test},
       {:coverex, "~> 1.5", only: :test},
       {:credo, "~> 1.1", only: [:dev, :test]},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:absinthe_websocket, "~> 0.2.0"}
     ]
   end
 

@@ -110,6 +110,47 @@ iex> Neuron.query("""
     )
 ```
 
+You can do subscriptions:
+
+```elixir
+defmodule AddUserSubscription do
+
+  @url "ws://localhost:4000/socket/websocket"
+
+  @query  """
+  subscription {userAdded {
+    name
+    age
+    color
+    uuid
+  }}
+  """
+
+
+  def supervisor() do
+    Neuron.Subscription.supervisor(subscriber: __MODULE__, url: @url, token: "")
+  end
+
+  def handle_update(data) do
+    IO.puts("Received Update - #{inspect(data)}")
+  end
+
+  def subscribe() do
+    Neuron.Subscription.subscribe(__MODULE__, @query, %{})
+  end
+
+end
+
+```
+
+and add this to your application children:
+
+```elixir
+
+AddUserSubscription.supervisor()
+
+```
+
 ### Overriding HTTP Timeout
 `HTTPoison` default timeout is 5000ms, in case we need to handle longer timeout, using default `Neuron.Connection` module, we could set `connection_opts` which will be passed to `HTTPoison`. So to override timeout to 15000ms, we could do:
 
