@@ -151,6 +151,8 @@ AddUserSubscription.supervisor()
 
 ```
 
+Absinthe GraphQL subscription server side: https://github.com/karlosmid/zoom
+
 ### Overriding HTTP Timeout
 `HTTPoison` default timeout is 5000ms, in case we need to handle longer timeout, using default `Neuron.Connection` module, we could set `connection_opts` which will be passed to `HTTPoison`. So to override timeout to 15000ms, we could do:
 
