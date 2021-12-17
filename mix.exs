@@ -39,7 +39,7 @@ defmodule Neuron.Mixfile do
       {:coverex, "~> 1.5", only: :test},
       {:credo, "~> 1.1", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:absinthe_websocket, "~> 0.2.0"}
+      {:absinthe_websocket, git: "https://github.com/karlosmid/absinthe_websocket"}
     ]
   end
 
