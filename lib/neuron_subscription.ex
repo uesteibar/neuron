@@ -17,7 +17,7 @@ defmodule Neuron.Subscription do
      ]}
   end
 
-  def subscribe(module, query) do
+  def subscribe(module, query, %{} = variables) do
     callback = fn result ->
       apply(module, :handle_update, [result])
     end
@@ -27,7 +27,7 @@ defmodule Neuron.Subscription do
       Neuron.Subscription,
       callback,
       query,
-      []
+      variables
     )
   end
 end
