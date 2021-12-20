@@ -6,15 +6,15 @@ defmodule Neuron.Subscription do
     {:ok, opts}
   end
 
-  def supervisor(subscriber: subscriber, url: url, token: token) do
-    {AbsintheWebSocket.Supervisor,
+  def supervisor(subscriber: subscriber, url: url, token: token, id: id) do
+    Supervisor.child_spec({AbsintheWebSocket.Supervisor,
      [
        subscriber: subscriber,
        url: url,
        token: token,
        base_name: subscriber,
        async: true
-     ]}
+     ]}, id: id)
   end
 
   def subscribe(module, query, %{} = variables) do
