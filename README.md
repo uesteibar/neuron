@@ -150,6 +150,13 @@ and add this to your application children:
 AddUserSubscription.supervisor()
 
 ```
+To have more logs in case of errors in your subscription module:
+
+```elixir
+config :logger,
+  level: :debug,
+  handle_sasl_reports: true
+```
 
 Absinthe GraphQL subscription server side: https://github.com/karlosmid/zoom
 
