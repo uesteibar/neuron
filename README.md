@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/horizontal.png" alt="neuron" height="150px"></p>
 
-[![Build Status](https://travis-ci.org/uesteibar/neuron.svg?branch=master)](https://travis-ci.org/uesteibar/neuron)
+[![Build Status](https://github.com/uesteibar/neuron/actions/workflows/ci.yml/badge.svg)](https://github.com/uesteibar/neuron/actions/workflows/ci.yml)
 [![Hex Version](https://img.shields.io/hexpm/v/neuron.svg)](https://hex.pm/packages/neuron)
 
 A GraphQL client for Elixir.

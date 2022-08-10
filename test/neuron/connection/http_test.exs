@@ -5,8 +5,8 @@ defmodule Neuron.Connection.HttpTest do
 
   alias Neuron.{
     Connection,
-    Response,
-    JSONParseError
+    JSONParseError,
+    Response
   }
 
   @json_libraries [Jason, Poison]
