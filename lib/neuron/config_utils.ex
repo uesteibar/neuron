@@ -9,7 +9,7 @@ defmodule Neuron.ConfigUtils do
   Returns the JSON library that is configured in Neuron. Default is Jason.
   """
   @spec json_library :: module()
-  def json_library() do
+  def json_library do
     Config.get(:json_library) || Jason
   end
 
@@ -24,7 +24,7 @@ defmodule Neuron.ConfigUtils do
   Returns the Connection module that is configured in Neuron. Default is Neuron.Connection.Http.
   """
   @spec connection_module :: module()
-  def connection_module() do
+  def connection_module do
     Config.get(:connection_module) || Neuron.Connection.Http
   end
 
