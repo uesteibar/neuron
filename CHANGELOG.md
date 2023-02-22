@@ -1,5 +1,17 @@
 # Changelog
 
+<a name="5.1.0"></a>
+## [5.1.0](https://github.com/uesteibar/neuron/compare/v5.0.0...v5.1.0) (2023-02-22)
+
+* Support HTTPoison 2.0 (#74) ([da19f70](https://github.com/uesteibar/neuron/commit/da19f70)), closes [#74](https://github.com/uesteibar/neuron/issues/74)
+
+### Bug Fixes
+
+* ci(github): bump deps and switch to github actions (#72) ([c56bc74](https://github.com/uesteibar/neuron/commit/c56bc74)), closes [#72](https://github.com/uesteibar/neuron/issues/72)
+
+
+
+<a name="5.0.0"></a>
 ## [5.0.0](https://github.com/uesteibar/neuron/compare/v4.1.2...v5.0.0) (2020-06-10)
 
 
