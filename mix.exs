@@ -31,7 +31,7 @@ defmodule Neuron.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 1.0"},
+      {:httpoison, "~> 1.0 or ~> 2.0"},
       {:coverex, "~> 1.5", only: :test},
       {:credo, "~> 1.1", only: [:dev, :test]},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
